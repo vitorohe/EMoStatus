@@ -1,6 +1,6 @@
 #read_prosody_csv.py
 import csv
-import os
+from os import system, listdir
 from numpy import mean, divide, round
 
 def get_str_number(num_len,i):
@@ -78,9 +78,20 @@ def get_words(cuts,audio_filename,output_dir):
 
 		str_number = get_str_number(num_len,i)
 
-		os.system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
+		system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
 		
 		i += 1
+
+def get_dir_wav_files(predict_path):
+	dir_files = listdir(predict_path)
+	wav_files = []
+	
+	for wfile in dir_files:
+    	if wfile.endswith('.wav'):
+        	wav_files.append(wfile)
+
+    wav_files = sorted(wav_files)
+    return wav_files
 
 def process_pf(pf_filename):
 
@@ -102,10 +113,12 @@ def process_pf(pf_filename):
 		pffile.close()
 
 	filename = pf_filename + "-results"
-
+	keys = prediction.keys()
+	keys = sorted(keys)
+	
 	with open(filename, "a") as file_results:
 	
-		for key in prediction.keys():
+		for key in keys:
 			mean_k = mean(prediction[key])
 			file_results.write("%s %s %s\n" % (key, mean_k, float("{0}".format(round(mean_k,3)))*100)) 
 		

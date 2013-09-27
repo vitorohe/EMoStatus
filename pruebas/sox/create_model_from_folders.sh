@@ -22,7 +22,7 @@ if [ "$lsvm_files" == "" ]
 		audio_files=`ls $folder*.wav`
 		
 		for audio_file in $audio_files; do
-			# ./convert_audio_file.sh $audio_file
+			# ./convert_audio_file.sh $audio_files
 			SMILExtract -C $SMILE_DIR/config/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
 			# output=$(SMILExtract -C $SMILE_DIR/config/emobase2010.conf -I $audio_file -O $folder/$folder_name-emobase2010.arff 2>&1)
 		done
@@ -42,7 +42,7 @@ NAME=$AUDIO_DIR$basename_dir-$conf_name-linear.lsvm
 SVM_FILES_DIR=$AUDIO_DIR
 SVM_TYPE=0 # C-SVC=0, nu-SVC=1, one-class=3  
 SVM_KERNEL=0 # Linear=0, Polynomial=1, RBF=3 
-SVM_DEGREE=3
+SVM_DEGREE=2
 SVM_GAMMA=1
 SVM_PROB=1
 
