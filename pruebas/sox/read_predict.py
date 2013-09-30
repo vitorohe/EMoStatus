@@ -1,6 +1,6 @@
 #read_prosody_csv.py
 import csv
-from os import system, listdir
+from os import system, listdir, path
 from numpy import mean, divide, round
 
 def get_str_number(num_len,i):
@@ -83,19 +83,26 @@ def get_words(cuts,audio_filename,output_dir):
 		i += 1
 
 def get_dir_wav_files(predict_path):
-	dir_files = listdir(predict_path)
+	predict_dir = path.dirname(predict_path)
+	dir_files = listdir(predict_dir)
 	wav_files = []
-	
+
 	for wfile in dir_files:
-    	if wfile.endswith('.wav'):
-        	wav_files.append(wfile)
+		if wfile.endswith('.wav'):
+			wav_files.append(predict_dir + '/' + wfile)
 
-    wav_files = sorted(wav_files)
-    return wav_files
+	wav_files = sorted(wav_files)
+	return wav_files
 
-def process_pf(pf_filename):
+def process_pf(pf_filename,class_number = None):
 
 	prediction = {}
+
+	if not class_number is None:
+		right_classified_files = []
+		wav_files = get_dir_wav_files(pf_filename)
+
+	i = 0
 
 	with open(pf_filename, 'rb') as pffile:
 		data = csv.reader(pffile, delimiter=' ')
@@ -109,7 +116,10 @@ def process_pf(pf_filename):
 			
 			for (name, value) in items:
 				prediction[name].append(float(value.strip()))
-	
+				if not class_number is None and name == 'labels' and class_number == value.strip():
+					right_classified_files.append(wav_files[i])
+
+			i = i + 1
 		pffile.close()
 
 	filename = pf_filename + "-results"
@@ -123,6 +133,15 @@ def process_pf(pf_filename):
 			file_results.write("%s %s %s\n" % (key, mean_k, float("{0}".format(round(mean_k,3)))*100)) 
 		
 		file_results.close()
+
+	if not class_number is None:
+		wavs_filename = pf_filename + "-wavs"
+		with open(wavs_filename, "a") as file_wavs:
+	
+			for wfile in right_classified_files:
+				file_wavs.write("%s\n" % wfile)
+		
+		file_wavs.close()		
 	
 if __name__ == '__main__':
 
@@ -132,14 +151,19 @@ if __name__ == '__main__':
     _cmd_parser = OptionParser(usage="usage: %prog [options]")
     _opt = _cmd_parser.add_option
     _opt("--pf", help="Set predict filename to process")
+    _opt("--cn", help="Set correct predict class number")
     
     _cmd_options, _cmd_args = _cmd_parser.parse_args()
 
     opt, args, parser = _cmd_options, _cmd_args, _cmd_parser
 
     pf_filename = None
-    
+    class_number = 0
+
     if opt.pf:
     	pf_filename = opt.pf
 
-    process_pf(pf_filename)
+    if opt.cn:
+    	class_number = opt.cn
+
+    process_pf(pf_filename,class_number = class_number)

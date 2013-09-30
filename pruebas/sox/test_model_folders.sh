@@ -3,6 +3,7 @@
 AUDIO_DIR=$1
 MODEL=$2
 SVM_PROB=$3
+SUB_CAT=$4
 
 model_base=`basename $MODEL`
 model_base=${model_base%.*.*}
@@ -12,7 +13,7 @@ SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 folders=`ls -d $AUDIO_DIR*/`
 
 conf_name="emobase2010"
-
+num_class = 1
 for folder in $folders; do
 	folder_name=`basename $folder`
 	lsvm_files=`find $folder -name \*$conf_name.lsvm`
@@ -27,13 +28,28 @@ for folder in $folders; do
 		# delete string field in arff file
 		
 		sed "s/'noname',//g" -i $folder/$folder_name-$conf_name.arff
-		sed "s/@attribute name string//g" -i $folder/$folder_name-$conf_name.arff
-		
+		sed "s/@attribute name string//g" -i $folder/$folder_name-$conf_name.arff		
 
 		# transform arff to libsvm
 		perl $SMILE_DIR/scripts/modeltrain/arffToLsvm.pl $folder/$folder_name-$conf_name.arff
 	fi
 	# predict svm
 	$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-predict -b $SVM_PROB $folder/$folder_name-$conf_name.lsvm $MODEL $folder/$folder_name-$model_base-predict
-	python read_predict.py --pf $folder/$folder_name-$model_base-predict
+	
+	if [ "$SUB_CAT" -eq "1" ]:
+		then
+		python read_predict.py --pf $folder/$folder_name-$model_base-predict --cn $num_class
+
+		mkdir $folder/$folder_name-wavs
+
+		filename="$folder/$folder_name-$model_base-predict-wavs"
+		while read -r line
+		do
+		    name=$line
+		    cp $name $folder/$folder_name-wavs
+		done < "$filename"
+	else
+		python read_predict.py --pf $folder/$folder_name-$model_base-predict
+	fi
+	num_class=$(( num_class+1 ))
 done
