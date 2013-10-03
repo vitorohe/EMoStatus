@@ -7,8 +7,9 @@ SVM_TYPE=$3
 SVM_KERNEL=$4
 SVM_DEGREE=$5
 SVM_GAMMA=$6
-SVM_PROB=$7
-CONF_NAME=$8
+SVM_C=$7
+SVM_PROB=$8
+CONF_NAME=$9
 
 SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 
@@ -32,4 +33,4 @@ for svm_file in $svm_files_names; do
 done
 
 # train model with params
-$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-train -s $SVM_TYPE -t $SVM_KERNEL -d $SVM_DEGREE -b $SVM_PROB $NAME $NAME.model
+$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-train -s $SVM_TYPE -t $SVM_KERNEL -d $SVM_DEGREE -c $SVM_C -b $SVM_PROB $NAME $NAME.model

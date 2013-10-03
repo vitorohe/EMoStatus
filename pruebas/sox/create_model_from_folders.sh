@@ -42,9 +42,10 @@ NAME=$AUDIO_DIR$basename_dir-$conf_name-linear.lsvm
 SVM_FILES_DIR=$AUDIO_DIR
 SVM_TYPE=0 # C-SVC=0, nu-SVC=1, one-class=3  
 SVM_KERNEL=0 # Linear=0, Polynomial=1, RBF=3 
-SVM_DEGREE=2
+SVM_DEGREE=1
 SVM_GAMMA=1
+SVM_C=1
 SVM_PROB=1
 
 # ./create_model.sh $NAME $SVM_FILES_DIR $SVM_TYPE $SVM_KERNEL $SVM_DEGREE $SVM_GAMMA $SVM_PROB
-./create_model.sh $NAME $SVM_FILES_DIR $SVM_TYPE $SVM_KERNEL $SVM_DEGREE $SVM_GAMMA $SVM_PROB $conf_name
+./create_model.sh $NAME $SVM_FILES_DIR $SVM_TYPE $SVM_KERNEL $SVM_DEGREE $SVM_GAMMA $SVM_C $SVM_PROB $conf_name
