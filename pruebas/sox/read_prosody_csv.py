@@ -13,7 +13,7 @@ def get_str_number(num_len,i):
 
 	return str_number + i_str
 
-def get_chunks(cuts,min_pause_to_cut):
+def get_chunks(cuts,min_pause_to_cut,output_dir):
 	pauses = []
 	chunks = []
 	ch_cuts = []
@@ -24,22 +24,24 @@ def get_chunks(cuts,min_pause_to_cut):
 	init_pause = cuts[0]['end']+1
 	# print init_pause
 	i = 1
-	import ipdb; ipdb.set_trace()
+	# import ipdb; ipdb.set_trace()
 	for num in range(1,len(cuts)):
 	
 		end_pause = cuts[num]['init'] - 1
 		pause = {'init':init_pause, 'end':end_pause, 'duration':end_pause - init_pause + 1}
-		
+		print pause
 		if pause['duration'] >= min_pause_to_cut:
 			
 			end_chunk = pause['init']-1
 			chunk = {'init':init_chunk, 'end':end_chunk, 'duration':end_chunk - init_chunk + 1, 'num_cuts':i, 'cuts':ch_cuts}
-			if chunk['duration'] > 700:
-				shorter_chunks = get_chunks(chunk['cuts'],min_pause_to_cut - 10)
-				chunks.append(shorter_chunks)
-			else:
+				
+			# if chunk['duration'] > 700:
+			# 	shorter_chunks = get_chunks(chunk['cuts'],min_pause_to_cut - 10)
+			# 	chunks.append(shorter_chunks)
+			# else:
+			# print '\t',chunk
+			if chunk['duration'] >= 50:
 				print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
-				print '\t',pause
 				chunks.append(chunk)
 
 			i = 0
@@ -50,7 +52,15 @@ def get_chunks(cuts,min_pause_to_cut):
 		ch_cuts.append(cuts[num])
 		init_pause = cuts[num]['end'] + 1
 
-	# get_words(chunks,audio_filename,output_dir)
+	if len(ch_cuts) > 0:
+		end_chunk = pause['init']-1
+		chunk = {'init':init_chunk, 'end':end_chunk, 'duration':end_chunk - init_chunk + 1, 'num_cuts':i, 'cuts':ch_cuts}
+		
+		if chunk['duration'] >= 50:
+			print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
+			chunks.append(chunk)
+
+	get_words(chunks,audio_filename,output_dir)
 
 def get_words(cuts,audio_filename,output_dir):
 	
@@ -153,7 +163,7 @@ if __name__ == '__main__':
     cuts = process_csv(csv_filename)
 
     if opt.ch:
-    	min_pause_to_cut = 50
-        get_chunks(cuts,min_pause_to_cut)
+    	min_pause_to_cut = 60
+        get_chunks(cuts,min_pause_to_cut,output_dir)
     else:
     	get_words(cuts,audio_filename,output_dir)
