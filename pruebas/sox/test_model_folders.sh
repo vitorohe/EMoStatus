@@ -12,7 +12,7 @@ SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 
 folders=`ls -d $AUDIO_DIR*/`
 
-conf_name="emobase2010"
+conf_name="IS10_paraling"
 num_class=1
 for folder in $folders; do
 	folder_name=`basename $folder`
@@ -36,20 +36,20 @@ for folder in $folders; do
 	# predict svm
 	$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-predict -b $SVM_PROB $folder/$folder_name-$conf_name.lsvm $MODEL $folder/$folder_name-$model_base-predict
 	
-	if [ "$SUB_CAT" == "1" ]
-		then
-		python read_predict.py --pf $folder$folder_name-$model_base-predict --cn $num_class
+	# if [ "$SUB_CAT" == "1" ]
+	# 	then
+	# 	python read_predict.py --pf $folder$folder_name-$model_base-predict --cn $num_class
 
-		mkdir $folder$folder_name-wavs
+	# 	mkdir $folder$folder_name-wavs
 
-		filename="$folder/$folder_name-$model_base-predict-wavs"
-		while read -r line
-		do
-		    name=$line
-		    cp $name $folder$folder_name-wavs
-		done < "$filename"
-	else
-		python read_predict.py --pf $folder/$folder_name-$model_base-predict
-	fi
+	# 	filename="$folder/$folder_name-$model_base-predict-wavs"
+	# 	while read -r line
+	# 	do
+	# 	    name=$line
+	# 	    cp $name $folder$folder_name-wavs
+	# 	done < "$filename"
+	# else
+	python read_predict.py --pf $folder/$folder_name-$model_base-predict
+	# fi
 	num_class=$(( num_class+1 ))
 done

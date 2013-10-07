@@ -53,7 +53,7 @@ def get_chunks(cuts,min_pause_to_cut,output_dir):
 		init_pause = cuts[num]['end'] + 1
 
 	if len(ch_cuts) > 0:
-		end_chunk = pause['init']-1
+		end_chunk = pause['end']-1
 		chunk = {'init':init_chunk, 'end':end_chunk, 'duration':end_chunk - init_chunk + 1, 'num_cuts':i, 'cuts':ch_cuts}
 		
 		if chunk['duration'] >= 50:
