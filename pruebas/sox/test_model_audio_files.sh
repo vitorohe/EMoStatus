@@ -6,6 +6,8 @@ SVM_PROB=$3
 
 SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 
+model_base=`basename $MODEL`
+model_base=${model_base%.*.*}
 
 folder=$AUDIO_DIR
 folder_name=`basename $folder`

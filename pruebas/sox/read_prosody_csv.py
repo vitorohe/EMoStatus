@@ -1,6 +1,6 @@
 #read_prosody_csv.py
 import csv
-import os
+from os import system, path, makedirs
 from numpy import mean, divide
 
 def get_str_number(num_len,i):
@@ -76,6 +76,7 @@ def get_words(cuts,audio_filename,output_dir):
 	
 	i = 1
 	
+	makedirs(output_dir)
 	for cut in cuts:
 	
 		init = cut['init']
@@ -88,7 +89,7 @@ def get_words(cuts,audio_filename,output_dir):
 
 		str_number = get_str_number(num_len,i)
 
-		os.system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
+		system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
 		
 		i += 1
 
