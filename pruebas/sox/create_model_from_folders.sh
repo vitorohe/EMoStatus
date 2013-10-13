@@ -8,7 +8,7 @@ SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 # per audio file generate audio chunks
 folders=`ls -d $AUDIO_DIR*/`
 
-conf_name="emo_large"
+conf_name="emobase2010"
 lsvm_files=`find $AUDIO_DIR*/ -name \*$conf_name.lsvm`
 
 # echo $svm_files

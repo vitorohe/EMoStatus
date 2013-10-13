@@ -13,7 +13,7 @@ def get_str_number(num_len,i):
 
 	return str_number + i_str
 
-def get_chunks(cuts,min_pause_to_cut,output_dir):
+def get_chunks(cuts,min_pause_to_cut,output_dir,same_output=False):
 	pauses = []
 	chunks = []
 	ch_cuts = []
@@ -60,9 +60,10 @@ def get_chunks(cuts,min_pause_to_cut,output_dir):
 			print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
 			chunks.append(chunk)
 
-	get_words(chunks,audio_filename,output_dir)
 
-def get_words(cuts,audio_filename,output_dir):
+	get_words(chunks,audio_filename,output_dir,same_output=same_output)
+
+def get_words(cuts,audio_filename,output_dir,same_output=False):
 	
 	total_cuts = len(cuts)
 
@@ -75,8 +76,11 @@ def get_words(cuts,audio_filename,output_dir):
 		num_len = 4
 	
 	i = 1
+	if not path.exists(output_dir):
+		makedirs(output_dir)
 	
-	makedirs(output_dir)
+	output_name = path.basename(audio_filename)
+
 	for cut in cuts:
 	
 		init = cut['init']
@@ -89,7 +93,10 @@ def get_words(cuts,audio_filename,output_dir):
 
 		str_number = get_str_number(num_len,i)
 
-		system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
+		if same_output:
+			system('sox %s %s%s trim %s %s' % (audio_filename,output_dir,output_name,init,duration))
+		else:
+			system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
 		
 		i += 1
 
@@ -143,6 +150,7 @@ if __name__ == '__main__':
     _opt("--au", help="Set audio filename to cut")
     _opt("--outdir", help="Set output dir where to save audio files")
     _opt("--ch", action="store_true", help="Cut audio file in chunks")
+    _opt("--sout", action="store_true", help="Cut phrase from audio file, and output with the same name")
 
     _cmd_options, _cmd_args = _cmd_parser.parse_args()
 
@@ -165,6 +173,9 @@ if __name__ == '__main__':
 
     if opt.ch:
     	min_pause_to_cut = 60
-        get_chunks(cuts,min_pause_to_cut,output_dir)
+    	if opt.sout:
+        	get_chunks(cuts,min_pause_to_cut,output_dir,same_output=True)
+        else:
+        	get_chunks(cuts,min_pause_to_cut,output_dir)
     else:
     	get_words(cuts,audio_filename,output_dir)
