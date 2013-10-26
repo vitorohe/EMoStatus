@@ -31,8 +31,11 @@ def get_chunks(cuts,min_pause_to_cut,output_dir,same_output=False):
 		pause = {'init':init_pause, 'end':end_pause, 'duration':end_pause - init_pause + 1}
 		print pause
 		if pause['duration'] >= min_pause_to_cut:
-			
-			end_chunk = pause['init']-1
+			if same_output:
+				end_chunk = cuts[num]['end']
+			else:
+				end_chunk = pause['init']-1
+
 			chunk = {'init':init_chunk, 'end':end_chunk, 'duration':end_chunk - init_chunk + 1, 'num_cuts':i, 'cuts':ch_cuts}
 				
 			# if chunk['duration'] > 700:
@@ -60,10 +63,9 @@ def get_chunks(cuts,min_pause_to_cut,output_dir,same_output=False):
 			print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
 			chunks.append(chunk)
 
+	get_cuts(chunks,audio_filename,output_dir,same_output=same_output)
 
-	get_words(chunks,audio_filename,output_dir,same_output=same_output)
-
-def get_words(cuts,audio_filename,output_dir,same_output=False):
+def get_cuts(cuts,audio_filename,output_dir,same_output=False,output_name=None):
 	
 	total_cuts = len(cuts)
 
@@ -79,7 +81,7 @@ def get_words(cuts,audio_filename,output_dir,same_output=False):
 	if not path.exists(output_dir):
 		makedirs(output_dir)
 	
-	output_name = path.basename(audio_filename)
+	audio_name = path.basename(audio_filename)
 
 	for cut in cuts:
 	
@@ -94,11 +96,31 @@ def get_words(cuts,audio_filename,output_dir,same_output=False):
 		str_number = get_str_number(num_len,i)
 
 		if same_output:
-			system('sox %s %s%s trim %s %s' % (audio_filename,output_dir,output_name,init,duration))
+			system('sox %s %s%s trim %s %s' % (audio_filename,output_dir,audio_name,init,duration))
+		elif not output_name is None:
+			system('sox %s %s%s%s.wav trim %s %s' % (audio_filename,output_dir,output_name,str_number,init,duration))
 		else:
 			system('sox %s %soutput%s.wav trim %s %s' % (audio_filename,output_dir,str_number,init,duration))
 		
 		i += 1
+
+def get_words(cuts,audio_filename,output_dir,output_name=None):
+	
+	final_words = []
+
+	for cut in cuts:
+	
+		duration = cut['duration']
+		duration = float(duration)
+	
+		if duration < 20:
+			continue
+
+		cut['duration'] = 20
+		final_words.append(cut)
+
+	get_cuts(final_words,audio_filename,output_dir,output_name=output_name)
+
 
 def process_csv(csv_filename):
 	i = 0
@@ -116,12 +138,12 @@ def process_csv(csv_filename):
 		while True:
 			try:
 
-				while float(spamreader.next()[2]) == 0.0 :
+				while float(spamreader.next()[3]) < 0.55 :
 					pass
 
 				init = int(spamreader.line_num) - 1
 
-				while float(spamreader.next()[2]) != 0.0 :
+				while float(spamreader.next()[3]) >= 0.55 :
 					pass
 
 				end = int(spamreader.line_num) - 2
@@ -151,6 +173,7 @@ if __name__ == '__main__':
     _opt("--outdir", help="Set output dir where to save audio files")
     _opt("--ch", action="store_true", help="Cut audio file in chunks")
     _opt("--sout", action="store_true", help="Cut phrase from audio file, and output with the same name")
+    _opt("--outname", help="Set the output prefix name for output files")
 
     _cmd_options, _cmd_args = _cmd_parser.parse_args()
 
@@ -159,6 +182,7 @@ if __name__ == '__main__':
     csv_filename = None
     audio_filename = None
     output_dir = ''
+    output_name = None
 
     if opt.csv:
     	csv_filename = opt.csv
@@ -178,4 +202,6 @@ if __name__ == '__main__':
         else:
         	get_chunks(cuts,min_pause_to_cut,output_dir)
     else:
-    	get_words(cuts,audio_filename,output_dir)
+    	if opt.outname:
+    		output_name = opt.outname
+    	get_words(cuts,audio_filename,output_dir,output_name=output_name)

@@ -29,7 +29,11 @@
         </activity>
         <activity
             android:name="com.thesis.emostatus.UserListActivity"
-            android:label="@string/title_activity_user_list" >
+            android:label="@string/title_activity_user_list"
+            android:parentActivityName="android.app.ListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.app.ListActivity" />
         </activity>
     </application>
 

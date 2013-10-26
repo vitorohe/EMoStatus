@@ -1,6 +1,7 @@
 #!/bin/bash
 
 AUDIO_DIR=$1
+CONF_NAME=$2
 
 # openSmile path
 SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
@@ -8,7 +9,7 @@ SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 # per audio file generate audio chunks
 folders=`ls -d $AUDIO_DIR*/`
 
-conf_name="emobase2010"
+conf_name=$CONF_NAME
 lsvm_files=`find $AUDIO_DIR*/ -name \*$conf_name.lsvm`
 
 # echo $svm_files
@@ -22,7 +23,8 @@ if [ "$lsvm_files" == "" ]
 		audio_files=`ls $folder*.wav`
 		
 		for audio_file in $audio_files; do
-			# ./convert_audio_file.sh $audio_files
+			# ./convert_audio_file.sh $audio_file
+			# ./normalize_audio_file $audio_file
 			SMILExtract -C $SMILE_DIR/config/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
 			# output=$(SMILExtract -C $SMILE_DIR/config/emobase2010.conf -I $audio_file -O $folder/$folder_name-emobase2010.arff 2>&1)
 		done
