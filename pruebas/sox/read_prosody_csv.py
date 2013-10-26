@@ -191,7 +191,9 @@ if __name__ == '__main__':
     	audio_filename = opt.au
 
     if opt.outdir:
-    	output_dir = opt.outdir + '/'
+    	output_dir = opt.outdir
+    	if not output_dir.endswith('/'):
+    		output_dir = output_dir + '/'
 
     cuts = process_csv(csv_filename)
 
