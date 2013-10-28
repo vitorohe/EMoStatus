@@ -21,9 +21,11 @@ public class UserListActivity extends Activity {
 		setupActionBar();
 		
 		String[] users = {"Tío Pepe","Abuela Lorena","Tío Jorge"};
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
-		        android.R.layout.simple_list_item_1, users);
+
+        UserArrayAdapter adapter = new UserArrayAdapter(this, users);
+        //setListAdapter(adapter);
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1, users);
 		ListView listView = (ListView) findViewById(R.id.list_users_monit);
 		listView.setAdapter(adapter);
 	}

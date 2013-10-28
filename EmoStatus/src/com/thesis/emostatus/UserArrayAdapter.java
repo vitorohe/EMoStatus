@@ -22,11 +22,12 @@ public class UserArrayAdapter extends ArrayAdapter<String> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.user_status_list, parent, false);
-		TextView name = (TextView) rowView.findViewById(R.id.name);
-		TextView status = (TextView) rowView.findViewById(R.id.status);
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.picture);
-		return rowView;
+		View user_info = inflater.inflate(R.layout.user_status_list, parent, false);
+		TextView name = (TextView) user_info.findViewById(R.id.name);
+		TextView status = (TextView) user_info.findViewById(R.id.status);
+		ImageView imageView = (ImageView) user_info.findViewById(R.id.picture);
+        name.setText(values[position]);
+		return user_info;
 	}
 
 }
