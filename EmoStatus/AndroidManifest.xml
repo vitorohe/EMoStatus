@@ -35,6 +35,9 @@
             android:name="com.thesis.emostatus.UserOptionsActivity">
 
         </activity>
+        <activity android:name=".HistoryUserActivity" />
+        <activity android:name=".MonitorUserActivity" />
+        <activity android:name=".AlertsUserActivity" />
     </application>
 
 </manifest>

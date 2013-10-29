@@ -50,9 +50,9 @@ public class UserListActivity extends ListActivity {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-//        Intent options;
-//        options = new Intent(this,UserOptionsActivity.class);
-//        this.startActivity(options);
+        Intent options;
+        options = new Intent(this,UserOptionsActivity.class);
+        this.startActivity(options);
 
     }
 
