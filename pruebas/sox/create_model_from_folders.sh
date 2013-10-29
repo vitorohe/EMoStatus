@@ -24,7 +24,8 @@ if [ "$lsvm_files" == "" ]
 		
 		for audio_file in $audio_files; do
 			# ./convert_audio_file.sh $audio_file
-			# ./normalize_audio_file $audio_file
+			# ./normalize_audio_file.sh $audio_file
+			# ./lowpass_audio_file.sh $audio_file
 			SMILExtract -C $SMILE_DIR/config/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
 			# output=$(SMILExtract -C $SMILE_DIR/config/emobase2010.conf -I $audio_file -O $folder/$folder_name-emobase2010.arff 2>&1)
 		done
