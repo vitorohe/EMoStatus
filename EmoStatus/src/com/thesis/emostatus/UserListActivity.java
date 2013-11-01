@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import persistance.EmoStatus;
 
 
 public class UserListActivity extends ListActivity {
@@ -50,6 +51,9 @@ public class UserListActivity extends ListActivity {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
+        EmoStatus app;
+        app = (EmoStatus)getApplicationContext();
+        app.setUserMonitorized(position);
         Intent options;
         options = new Intent(this,UserOptionsActivity.class);
         this.startActivity(options);

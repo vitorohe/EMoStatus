@@ -116,7 +116,10 @@ def get_words(cuts,audio_filename,output_dir,output_name=None):
 		if duration < 20:
 			continue
 
-		cut['duration'] = 20
+		# cut['duration'] = 20
+		if duration > 80:
+			cut['duration'] = 80
+
 		final_words.append(cut)
 
 	get_cuts(final_words,audio_filename,output_dir,output_name=output_name)
