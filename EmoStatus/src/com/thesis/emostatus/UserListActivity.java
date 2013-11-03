@@ -17,12 +17,10 @@ public class UserListActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Show the Up button in the action bar.
 		setupActionBar();
-		
-		String[] users = {"Tío Pepe","Abuela Lorena","Tío Jorge"};
-
-        UserArrayAdapter adapter = new UserArrayAdapter(this, users);
+        EmoStatus app = (EmoStatus)getApplicationContext();
+        assert app != null;
+        UserArrayAdapter adapter = new UserArrayAdapter(this,app.getUsersMonitorized());
         setListAdapter(adapter);
 	}
 
@@ -53,7 +51,7 @@ public class UserListActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
         EmoStatus app;
         app = (EmoStatus)getApplicationContext();
-        app.setUserMonitorized(position);
+        app.setActualUserMonitorized(position);
         Intent options;
         options = new Intent(this,UserOptionsActivity.class);
         this.startActivity(options);

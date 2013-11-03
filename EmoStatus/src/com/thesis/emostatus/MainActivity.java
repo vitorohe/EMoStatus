@@ -4,10 +4,15 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import persistance.EmoStatus;
 
 public class MainActivity extends Activity implements OnClickListener{
 
@@ -26,12 +31,36 @@ public class MainActivity extends Activity implements OnClickListener{
 
 		switch(arg0.getId()){
 			case R.id.login:
-			Intent login = new Intent(this,UserListActivity.class);
-//				start_game.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			this.startActivity(login);
-			finish();
+            login();
 		}
 
 	}
-    
+
+    private void login() {
+        String username = ((EditText) findViewById(R.id.username)).getText().toString();
+        String password = ((EditText) findViewById(R.id.password)).getText().toString();
+
+        if(username.equals("emostatus") && password.equals("emopass")){
+
+            getDataFromAccount();
+
+            Intent login = new Intent(this,UserListActivity.class);
+            this.startActivity(login);
+            finish();
+        }
+        else{
+            //Dialog of error or Toast
+        }
+
+    }
+
+    private void getDataFromAccount() {
+        EmoStatus app = (EmoStatus)getApplicationContext();
+        List<String> usersList = new ArrayList<String>();
+        usersList.add("Tío Pepe");
+        usersList.add("Abuela Lorena");
+        usersList.add("Tío Jorge");
+        app.setUsersMonitorized(usersList);
+    }
+
 }

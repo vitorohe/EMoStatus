@@ -6,14 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+
 import android.widget.TextView;
+
+import java.util.List;
 
 
 public class UserArrayAdapter extends ArrayAdapter<String> {
 	private final Context context;
-	private final String[] values;
+	private final List<String> values;
 	
-	public UserArrayAdapter(Context context, String[] values) {
+	public UserArrayAdapter(Context context, List<String> values) {
 		super(context, R.layout.user_status_list, values);
 		this.context = context;
 		this.values = values;
@@ -26,7 +29,7 @@ public class UserArrayAdapter extends ArrayAdapter<String> {
 		TextView name = (TextView) user_info.findViewById(R.id.name);
 		TextView status = (TextView) user_info.findViewById(R.id.status);
 		ImageView imageView = (ImageView) user_info.findViewById(R.id.picture);
-        name.setText(values[position]);
+        name.setText(values.get(position));
 		return user_info;
 	}
 

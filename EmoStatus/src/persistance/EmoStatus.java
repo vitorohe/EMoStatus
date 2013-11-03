@@ -3,12 +3,18 @@ package persistance;
 import android.app.Application;
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class EmoStatus extends Application{
     private Context bsc;
-    private int userMonitorized;
+    private int actualUserMonitorized;
+    private List<String> usersMonitorized;
 
     public EmoStatus(){
         super();
+        this.usersMonitorized = new ArrayList<String>();
     }
 
     @Override
@@ -17,11 +23,19 @@ public class EmoStatus extends Application{
         bsc = getBaseContext();
     }
 
-    public void setUserMonitorized(int userMonitorized) {
-        this.userMonitorized = userMonitorized;
+    public void setActualUserMonitorized(int actualUserMonitorized) {
+        this.actualUserMonitorized = actualUserMonitorized;
     }
 
-    public int getUserMonitorized() {
-        return this.userMonitorized;
+    public String getActualUserMonitorized() {
+        return this.usersMonitorized.get(this.actualUserMonitorized);
+    }
+
+    public List getUsersMonitorized() {
+        return usersMonitorized;
+    }
+
+    public void setUsersMonitorized(List usersMonitorized) {
+        this.usersMonitorized = usersMonitorized;
     }
 }

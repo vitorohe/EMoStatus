@@ -8,7 +8,7 @@ import persistance.EmoStatus;
 
 public class UserOptionsActivity extends FragmentActivity {
     private FragmentTabHost mTabHost;
-    private int user;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +23,9 @@ public class UserOptionsActivity extends FragmentActivity {
         mTabHost.addTab(mTabHost.newTabSpec("alerts").setIndicator("Alertas"),AlertsUserActivity.class,null);
 
         EmoStatus app = (EmoStatus)getApplicationContext();
-        user = app.getUserMonitorized();
+        user = app.getActualUserMonitorized();
 
         ActionBar actionBar = getActionBar();
-        actionBar.setTitle(""+user);
+        actionBar.setTitle(user);
     }
 }
