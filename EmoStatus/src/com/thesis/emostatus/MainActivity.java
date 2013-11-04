@@ -40,7 +40,8 @@ public class MainActivity extends Activity implements OnClickListener{
         String username = ((EditText) findViewById(R.id.username)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-        if(username.equals("emostatus") && password.equals("emopass")){
+        //if(username.equals("emostatus") && password.equals("emopass")){
+        if(username.equals("") && password.equals("")){
 
             getDataFromAccount();
 
