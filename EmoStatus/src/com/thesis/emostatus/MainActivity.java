@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistance.EmoStatus;
+import persistance.ThreeDataComponent;
 
 public class MainActivity extends Activity implements OnClickListener{
 
@@ -57,10 +58,10 @@ public class MainActivity extends Activity implements OnClickListener{
 
     private void getDataFromAccount() {
         EmoStatus app = (EmoStatus)getApplicationContext();
-        List<String> usersList = new ArrayList<String>();
-        usersList.add("Tío Pepe");
-        usersList.add("Abuela Lorena");
-        usersList.add("Tío Jorge");
+        List<ThreeDataComponent> usersList = new ArrayList<ThreeDataComponent>();
+        usersList.add(new ThreeDataComponent("Tío Pepe","Triste (90%)",""));
+        usersList.add(new ThreeDataComponent("Abuela Lorena","Triste (75%)",""));
+        usersList.add(new ThreeDataComponent("Tío Jorge","Normal",""));
         app.setUsersMonitorized(usersList);
     }
 

@@ -19,7 +19,6 @@ public class UserListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setupActionBar();
         EmoStatus app = (EmoStatus)getApplicationContext();
-        assert app != null;
         UserArrayAdapter adapter = new UserArrayAdapter(this,app.getUsersMonitorized());
         setListAdapter(adapter);
 	}
