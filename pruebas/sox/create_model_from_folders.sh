@@ -10,6 +10,7 @@ SMILE_DIR="/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile"
 folders=`ls -d $AUDIO_DIR*/`
 
 conf_name=$CONF_NAME
+conf_name="avec2013_functionals"
 lsvm_files=`find $AUDIO_DIR*/ -name \*$conf_name.lsvm`
 
 # echo $svm_files
@@ -26,11 +27,12 @@ if [ "$lsvm_files" == "" ]
 			# ./convert_audio_file.sh $audio_file
 			# ./normalize_audio_file.sh $audio_file
 			# ./lowpass_audio_file.sh $audio_file
-			SMILExtract -C $SMILE_DIR/config/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
+			# SMILExtract -C $SMILE_DIR/config/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
+			SMILExtract -C $SMILE_DIR/scripts/avec2013/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
 			# output=$(SMILExtract -C $SMILE_DIR/config/emobase2010.conf -I $audio_file -O $folder/$folder_name-emobase2010.arff 2>&1)
 		done
 		
-		sed "s/'noname',//g" -i $folder/$folder_name-$conf_name.arff
+		sed "s/'.*',//g" -i $folder/$folder_name-$conf_name.arff
 		sed "s/@attribute name string//g" -i $folder/$folder_name-$conf_name.arff
 		
 		# transform arff to libsvm

@@ -15,11 +15,11 @@ import java.util.List;
 import persistance.ThreeDataComponent;
 
 
-public class UserArrayAdapter extends ArrayAdapter<ThreeDataComponent> {
+public class ThreeCompArrayAdapter extends ArrayAdapter<ThreeDataComponent> {
 	private final Context context;
 	private final List<ThreeDataComponent> values;
 
-	public UserArrayAdapter(Context context, List<ThreeDataComponent> values) {
+	public ThreeCompArrayAdapter(Context context, List<ThreeDataComponent> values) {
 		super(context, R.layout.two_line_component_list, values);
 		this.context = context;
 		this.values = values;
