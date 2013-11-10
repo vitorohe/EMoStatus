@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <application
@@ -36,9 +36,6 @@
             android:name="com.thesis.emostatus.UserOptionsActivity">
 
         </activity>
-        <activity android:name=".HistoryUserActivity" />
-        <activity android:name=".MonitorUserActivity" />
-        <activity android:name=".AlertsUserActivity" />
     </application>
 
 </manifest>

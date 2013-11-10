@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="days_week" />
+    <item type="id" name="init_hour" />
+    <item type="id" name="end_hour" />
+    <item type="id" name="freq" />
+</resources>
