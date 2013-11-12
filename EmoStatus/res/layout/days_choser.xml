@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayoutv"
+    android:layout_alignParentEnd="false"
+    android:layout_gravity="center"
+    android:layout_centerHorizontal="true"
+    android:padding="10dp">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayouth1"
+        android:layout_alignParentEnd="false"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true">
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:textOff="Lu"
+            android:textOn="Lu"
+            android:id="@+id/toggleButton"
+            android:background="@drawable/toggle"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentTop="true"/>
+
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButton1"
+            android:layout_alignTop="@+id/toggleButton"
+            android:background="@drawable/toggle"
+            android:layout_marginRight="2dp"
+            android:textOff="Ma"
+            android:textOn="Ma"/>
+
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:textOff="Mi"
+            android:textOn="Mi"
+            android:id="@+id/toggleButton2"
+            android:background="@drawable/toggle"
+            android:layout_marginLeft="2dp"
+            android:layout_alignTop="@+id/toggleButton" />
+
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:textOff="Ju"
+            android:textOn="Ju"
+            android:id="@+id/toggleButton3"
+            android:background="@drawable/toggle"
+            android:layout_marginLeft="4dp"
+            android:layout_alignTop="@+id/toggleButton"/>
+    </LinearLayout>
+        
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayouth2"
+        android:layout_alignParentEnd="false"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true">
+
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/toggle"
+            android:textOff="Vi"
+            android:textOn="Vi"
+            android:id="@+id/toggleButton4"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="4dp"/>
+
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/toggle"
+            android:textOff="Sa"
+            android:textOn="Sa"
+            android:id="@+id/toggleButton5"
+            android:layout_marginTop="4dp"/>
+
+        <ToggleButton
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:textOff="Do"
+            android:textOn="Do"
+            android:id="@+id/toggleButton6"
+            android:background="@drawable/toggle"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="4dp"/>
+
+    </LinearLayout>
+
+
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Todos"
+        android:id="@+id/allDays"
+        android:checked="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

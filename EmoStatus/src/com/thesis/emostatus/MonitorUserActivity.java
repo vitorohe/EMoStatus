@@ -1,31 +1,44 @@
 package com.thesis.emostatus;
 
+import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TooManyListenersException;
+import java.util.zip.CheckedInputStream;
 
 import persistance.EmoStatus;
 import persistance.OptionComponent;
 import persistance.OptionInfoComponent;
 
 public class MonitorUserActivity extends Fragment {
+
+    private boolean[] days_marked;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        days_marked = new boolean[7];
 
         ScrollView sv = new ScrollView(getActivity());
         sv.setFillViewport(true);
@@ -67,6 +80,7 @@ public class MonitorUserActivity extends Fragment {
 
                 switch (view.getId()){
                     case R.id.days_week:
+                        showDaysDialog();
                         break;
                     case R.id.init_hour:
                         showTimePickerDialog(R.id.init_hour);
@@ -87,7 +101,7 @@ public class MonitorUserActivity extends Fragment {
 
     
     private void showTimePickerDialog(final int id) {
-        View v = (View)getActivity().findViewById(id);
+        View v = getActivity().findViewById(id);
         final TextView info = (TextView)v.findViewById(R.id.info);
         TextView title = (TextView)v.findViewById(R.id.title);
 
@@ -108,5 +122,131 @@ public class MonitorUserActivity extends Fragment {
         TimePickerDialog tmpd = new TimePickerDialog(getActivity(), timeL, hour, min, true);
         tmpd.setMessage("Fijar "+title.getText());
         tmpd.show();
+    }
+
+    public void showDaysDialog(){
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Elegir días de la semana");
+        View view = getActivity().getLayoutInflater().inflate(R.layout.days_choser,alertDialog.getListView());
+        setDaysViewListeners(view);
+        alertDialog.setView(view);
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Listo", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+                //here you can add functions
+
+            }
+        });
+        //alertDialog.setIcon(R.drawable.icon);
+        alertDialog.show();
+
+    }
+
+    private void setDaysViewListeners(View view) {
+        final List<ToggleButton> days = new ArrayList<ToggleButton>();
+        ToggleButton lu =  (ToggleButton)view.findViewById(R.id.toggleButton);
+        days.add(lu);
+        lu.setChecked(days_marked[0]);
+        lu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[0] = true;
+                } else {
+                    days_marked[0] = false;
+                }
+            }
+        });
+        ToggleButton ma = (ToggleButton)view.findViewById(R.id.toggleButton1);
+        days.add(ma);
+        ma.setChecked(days_marked[1]);
+        ma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[1] = true;
+                } else {
+                    days_marked[1] = false;
+                }
+            }
+        });
+
+        ToggleButton mi = (ToggleButton)view.findViewById(R.id.toggleButton2);
+        days.add(mi);
+        mi.setChecked(days_marked[2]);
+        mi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[2] = true;
+                } else {
+                    days_marked[2] = false;
+                }
+            }
+        });
+
+        ToggleButton ju = (ToggleButton)view.findViewById(R.id.toggleButton3);
+        days.add(ju);
+        ju.setChecked(days_marked[3]);
+        ju.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[3] = true;
+                } else {
+                    days_marked[3] = false;
+                }
+            }
+        });
+
+        ToggleButton vi = (ToggleButton)view.findViewById(R.id.toggleButton4);
+        days.add(vi);
+        vi.setChecked(days_marked[4]);
+        vi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[4] = true;
+                } else {
+                    days_marked[4] = false;
+                }
+            }
+        });
+
+        ToggleButton sa = (ToggleButton)view.findViewById(R.id.toggleButton5);
+        days.add(sa);
+        sa.setChecked(days_marked[5]);
+        sa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[5] = true;
+                } else {
+                    days_marked[5] = false;
+                }
+            }
+        });
+
+        ToggleButton dom = (ToggleButton)view.findViewById(R.id.toggleButton6);
+        days.add(dom);
+        dom.setChecked(days_marked[6]);
+        dom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    days_marked[6] = true;
+                } else {
+                    days_marked[6] = false;
+                }
+            }
+        });
+
+        CheckBox all = (CheckBox)view.findViewById(R.id.allDays);
+        all.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                for(int i = 0; i < 7; i++){
+                    days_marked[i] = checked;
+                    days.get(i).setChecked(checked);
+                }
+            }
+        });
     }
 }
