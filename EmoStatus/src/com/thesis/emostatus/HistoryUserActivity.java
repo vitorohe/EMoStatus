@@ -25,8 +25,8 @@ public class HistoryUserActivity extends Fragment {
         super.onCreate(savedInstanceState);
 
         ScrollView sv = new ScrollView(getActivity());
-        sv.setFillViewport(true);
-        sv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
+        //sv.setFillViewport(true);
+        //sv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
         //sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         //sv.setVerticalScrollBarEnabled(true);
         LinearLayout ll = new LinearLayout(getActivity());
@@ -50,14 +50,14 @@ public class HistoryUserActivity extends Fragment {
             day_date.setPadding(15,10,0,10);
             day_date.setTypeface(null, Typeface.BOLD);
             day_date.setBackgroundColor(Color.LTGRAY);
+            ll.addView(day_date);
 
             ListView day = new ListView(getActivity());
-            day.addHeaderView(day_date);
             day.setHeaderDividersEnabled(true);
             ThreeCompArrayAdapter adapter = new ThreeCompArrayAdapter(getActivity(),hist.getHistory());
             day.setAdapter(adapter);
-            //day.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            day.setEnabled(false);
+            day.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+                    90*hist.getHistory().size(),1f*hist.getHistory().size()));
             day_date.setVerticalScrollBarEnabled(false);
             ll.addView(day);
         }

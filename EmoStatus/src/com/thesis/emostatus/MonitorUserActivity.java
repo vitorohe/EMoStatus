@@ -41,7 +41,7 @@ public class MonitorUserActivity extends Fragment {
         days_marked = new boolean[7];
 
         ScrollView sv = new ScrollView(getActivity());
-        sv.setFillViewport(true);
+        //sv.setFillViewport(true);
         LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
         sv.addView(ll);
@@ -59,6 +59,8 @@ public class MonitorUserActivity extends Fragment {
         ListView options = new ListView(getActivity());
         OptionArrayAdapter adapter = new OptionArrayAdapter(getActivity(),opts);
         options.setAdapter(adapter);
+        options.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                70*2,1f*2));
         ll.addView(options);
 
         List<OptionInfoComponent> recordingOptsInfo = new ArrayList<OptionInfoComponent>();
@@ -94,7 +96,8 @@ public class MonitorUserActivity extends Fragment {
             }
         });
 
-
+        recordingOpts.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                50*4,1f*4));
         ll.addView(recordingOpts);
 
     }
@@ -120,7 +123,7 @@ public class MonitorUserActivity extends Fragment {
         int hour = Integer.parseInt(data[0]);
         int min = Integer.parseInt(data[1]);
         TimePickerDialog tmpd = new TimePickerDialog(getActivity(), timeL, hour, min, true);
-        tmpd.setMessage("Fijar "+title.getText());
+        tmpd.setTitle("Fijar "+title.getText());
         tmpd.show();
     }
 
@@ -136,14 +139,53 @@ public class MonitorUserActivity extends Fragment {
         });
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Listo", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-
-                //here you can add functions
-
+                updateDaysInView();
             }
         });
-        //alertDialog.setIcon(R.drawable.icon);
+        updateDaysInView();
         alertDialog.show();
 
+    }
+
+    private void updateDaysInView(){
+        View view = getActivity().findViewById(R.id.days_week);
+        TextView info = (TextView)view.findViewById(R.id.info);
+        String infoT = "";
+
+        if(days_marked[0])
+            infoT = "Lu";
+        if(days_marked[1])
+            if(infoT.equals(""))
+                infoT = "Ma";
+            else
+                infoT = infoT + ",Ma";
+        if(days_marked[2])
+            if(infoT.equals(""))
+                infoT = "Mi";
+            else
+                infoT = infoT + ",Mi";
+        if(days_marked[3])
+            if(infoT.equals(""))
+                infoT = "Ju";
+            else
+                infoT = infoT + ",Ju";
+        if(days_marked[4])
+            if(infoT.equals(""))
+                infoT = "Vi";
+            else
+                infoT = infoT + ",Vi";
+        if(days_marked[5])
+            if(infoT.equals(""))
+                infoT = "Sa";
+            else
+                infoT = infoT + ",Sa";
+        if(days_marked[6])
+            if(infoT.equals(""))
+                infoT = "Do";
+            else
+                infoT = infoT + ",Do";
+
+        info.setText(infoT);
     }
 
     private void setDaysViewListeners(View view) {

@@ -16,10 +16,11 @@ import persistance.EmoStatus;
 import persistance.OptionComponent;
 
 public class AlertsUserActivity extends Fragment {
+        LayoutInflater inflaterA;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        inflaterA = inflater;
         ScrollView sv = new ScrollView(getActivity());
         sv.setFillViewport(true);
         LinearLayout ll = new LinearLayout(getActivity());
@@ -32,14 +33,32 @@ public class AlertsUserActivity extends Fragment {
     private void addOptionsToListLayout(LinearLayout ll) {
         EmoStatus app = (EmoStatus)getActivity().getApplicationContext();
 
-        List<OptionComponent> opts = new ArrayList<OptionComponent>();
-        opts.add(new OptionComponent("SMS","",false));
-        opts.add(new OptionComponent("Correo electrónico","",false));
-        opts.add(new OptionComponent("EmoStatus notificación","",false));
+        List<OptionComponent> opts1 = new ArrayList<OptionComponent>();
+        List<OptionComponent> opts2 = new ArrayList<OptionComponent>();
+        List<OptionComponent> opts3 = new ArrayList<OptionComponent>();
+        opts1.add(new OptionComponent("SMS","",false));
+        opts2.add(new OptionComponent("Correo electrónico","",false));
+        opts3.add(new OptionComponent("EmoStatus notificación","",false));
 
-        ListView options = new ListView(getActivity());
-        OptionArrayAdapter adapter = new OptionArrayAdapter(getActivity(),opts);
-        options.setAdapter(adapter);
-        ll.addView(options);
+        ListView options1 = new ListView(getActivity());
+        OptionArrayAdapter adapter1 = new OptionArrayAdapter(getActivity(),opts1);
+        options1.setAdapter(adapter1);
+        ll.addView(options1);
+
+        //View email = inflaterA.inflate(R.layout.alert_email,ll);
+        //ll.addView(email);
+
+        ListView options2 = new ListView(getActivity());
+        OptionArrayAdapter adapter2 = new OptionArrayAdapter(getActivity(),opts2);
+        options2.setAdapter(adapter2);
+        ll.addView(options2);
+
+        //View phone = inflaterA.inflate(R.layout.alert_phone,ll);
+        //ll.addView(phone);
+
+        ListView options3 = new ListView(getActivity());
+        OptionArrayAdapter adapter3 = new OptionArrayAdapter(getActivity(),opts3);
+        options3.setAdapter(adapter3);
+        ll.addView(options3);
     }
 }

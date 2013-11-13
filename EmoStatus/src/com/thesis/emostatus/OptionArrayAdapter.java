@@ -31,8 +31,8 @@ public class OptionArrayAdapter extends ArrayAdapter<OptionComponent> {
 		TextView title = (TextView) option.findViewById(R.id.title);
 		ImageView icon= (ImageView) option.findViewById(R.id.icon);
 		Switch button_switch = (Switch) option.findViewById(R.id.button_switch);
-        button_switch.setTextOff(" ");
-        button_switch.setTextOn(" ");
+        button_switch.setTextOff("NO");
+        button_switch.setTextOn("SÍ");
         title.setText(values.get(position).getTitle());
         //icon.setImageResource();
         button_switch.setChecked(values.get(position).isChecked());
