@@ -3,16 +3,16 @@ package persistance;
 public class ThreeDataComponent{
     private String title;
     private String description;
-    private String image_path;
+    private int imageId;
 
     public ThreeDataComponent(){
 
     }
 
-    public ThreeDataComponent(String title, String description, String image_path){
+    public ThreeDataComponent(String title, String description, int imageId){
         setTitle(title);
         setDescription(description);
-        setImage_path(image_path);
+        setImageId(imageId);
     }
 
     public String getTitle() {
@@ -31,11 +31,11 @@ public class ThreeDataComponent{
         this.description = description;
     }
 
-    public String getImage_path() {
-        return image_path;
+    public int getImageId() {
+        return imageId;
     }
 
-    public void setImage_path(String image_path) {
-        this.image_path = image_path;
+    public void setImageId(int imageId) {
+        this.imageId= imageId;
     }
 }

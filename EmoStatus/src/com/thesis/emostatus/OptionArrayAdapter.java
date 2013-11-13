@@ -34,7 +34,7 @@ public class OptionArrayAdapter extends ArrayAdapter<OptionComponent> {
         button_switch.setTextOff("NO");
         button_switch.setTextOn("SÍ");
         title.setText(values.get(position).getTitle());
-        //icon.setImageResource();
+        //icon.setImageResource(values.get(position).getIconId());
         button_switch.setChecked(values.get(position).isChecked());
 		return option;
 	}

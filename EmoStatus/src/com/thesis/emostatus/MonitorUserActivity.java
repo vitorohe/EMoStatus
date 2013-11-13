@@ -53,8 +53,8 @@ public class MonitorUserActivity extends Fragment {
         EmoStatus app = (EmoStatus)getActivity().getApplicationContext();
 
         List<OptionComponent> opts = new ArrayList<OptionComponent>();
-        opts.add(new OptionComponent("Skype","",false));
-        opts.add(new OptionComponent("Grabación","",false));
+        opts.add(new OptionComponent("Skype",R.drawable.icon_skype,false));
+        opts.add(new OptionComponent("Grabación",R.drawable.icon_mic,false));
 
         ListView options = new ListView(getActivity());
         OptionArrayAdapter adapter = new OptionArrayAdapter(getActivity(),opts);

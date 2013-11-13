@@ -5,16 +5,16 @@ package persistance;
  */
 public class OptionComponent {
     private String title;
-    private String iconPath;
+    private int iconId;
     private Boolean checked;
 
     public OptionComponent(){
 
     }
 
-    public OptionComponent(String title, String iconPath, Boolean checked){
+    public OptionComponent(String title, int iconId, Boolean checked){
         setTitle(title);
-        setIconPath(iconPath);
+        setIconPath(iconId);
         setChecked(checked);
     }
 
@@ -26,12 +26,12 @@ public class OptionComponent {
         this.title = title;
     }
 
-    public String getIconPath() {
-        return iconPath;
+    public int getIconId() {
+        return iconId;
     }
 
-    public void setIconPath(String iconPath) {
-        this.iconPath = iconPath;
+    public void setIconPath(int iconId) {
+        this.iconId = iconId;
     }
 
     public Boolean isChecked() {

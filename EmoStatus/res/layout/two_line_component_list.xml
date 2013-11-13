@@ -24,13 +24,14 @@
         android:singleLine="true"
         android:text="Description"
         android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
         android:layout_below="@+id/title"
         android:layout_alignParentLeft="true" />
 
     <ImageView
         android:id="@+id/picture"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:contentDescription="TODO"
         android:src="@drawable/ic_launcher"
         android:layout_alignTop="@+id/title"

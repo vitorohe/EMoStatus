@@ -34,6 +34,7 @@ public class ThreeCompArrayAdapter extends ArrayAdapter<ThreeDataComponent> {
 		ImageView imageView = (ImageView) user_info.findViewById(R.id.picture);
         name.setText(values.get(position).getTitle());
         status.setText(values.get(position).getDescription());
+        imageView.setImageResource(values.get(position).getImageId());
 		return user_info;
 	}
 

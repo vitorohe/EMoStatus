@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener{
             finish();
         }
         else{
-            //Dialog of error or Toast
+            Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
         }
 
     }
@@ -59,9 +60,9 @@ public class MainActivity extends Activity implements OnClickListener{
     private void getDataFromAccount() {
         EmoStatus app = (EmoStatus)getApplicationContext();
         List<ThreeDataComponent> usersList = new ArrayList<ThreeDataComponent>();
-        usersList.add(new ThreeDataComponent("Tío Pepe","Triste (90%)",""));
-        usersList.add(new ThreeDataComponent("Abuela Lorena","Triste (75%)",""));
-        usersList.add(new ThreeDataComponent("Tío Jorge","Normal",""));
+        usersList.add(new ThreeDataComponent("Tío Pepe","Triste (90%)",R.drawable.user_tio_pepe));
+        usersList.add(new ThreeDataComponent("Abuela Lorena","Triste (75%)",R.drawable.user_abuela_lorena));
+        usersList.add(new ThreeDataComponent("Tío Jorge","Normal",R.drawable.user_tio_jorge));
         app.setUsersMonitorized(usersList);
     }
 

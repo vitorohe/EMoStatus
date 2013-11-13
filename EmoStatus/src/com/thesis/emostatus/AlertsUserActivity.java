@@ -36,9 +36,9 @@ public class AlertsUserActivity extends Fragment {
         List<OptionComponent> opts1 = new ArrayList<OptionComponent>();
         List<OptionComponent> opts2 = new ArrayList<OptionComponent>();
         List<OptionComponent> opts3 = new ArrayList<OptionComponent>();
-        opts1.add(new OptionComponent("SMS","",false));
-        opts2.add(new OptionComponent("Correo electrónico","",false));
-        opts3.add(new OptionComponent("EmoStatus notificación","",false));
+        opts1.add(new OptionComponent("SMS",R.drawable.icon_sms,false));
+        opts2.add(new OptionComponent("Correo electrónico",R.drawable.icon_email,false));
+        opts3.add(new OptionComponent("EmoStatus notificación",R.drawable.icon_emonot,false));
 
         ListView options1 = new ListView(getActivity());
         OptionArrayAdapter adapter1 = new OptionArrayAdapter(getActivity(),opts1);
@@ -46,7 +46,7 @@ public class AlertsUserActivity extends Fragment {
         ll.addView(options1);
 
         //View email = inflaterA.inflate(R.layout.alert_email,ll);
-        //ll.addView(email);
+        //ll.addView(icon_email);
 
         ListView options2 = new ListView(getActivity());
         OptionArrayAdapter adapter2 = new OptionArrayAdapter(getActivity(),opts2);

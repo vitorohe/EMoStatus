@@ -25,15 +25,8 @@ public class HistoryUserActivity extends Fragment {
         super.onCreate(savedInstanceState);
 
         ScrollView sv = new ScrollView(getActivity());
-        //sv.setFillViewport(true);
-        //sv.setOverScrollMode(View.OVER_SCROLL_IF_CONTENT_SCROLLS);
-        //sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        //sv.setVerticalScrollBarEnabled(true);
         LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
-        //ll.setVerticalScrollBarEnabled(true);
-        //ll.setScrollContainer(true);
-        //ll.setScrollbarFadingEnabled(true);
         ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         sv.addView(ll);
         addDaysToListLayout(ll);
