@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import java.util.ArrayList;
@@ -51,10 +52,15 @@ public class MonitorUserActivity extends Fragment {
 
     private void addOptionsToListLayout(LinearLayout ll) {
         EmoStatus app = (EmoStatus)getActivity().getApplicationContext();
+        days_marked[1] = true;
+        days_marked[2] = true;
+        days_marked[4] = true;
+        boolean skype_enabled = false;
+        boolean mic_enabled = false;
 
         List<OptionComponent> opts = new ArrayList<OptionComponent>();
-        opts.add(new OptionComponent("Skype",R.drawable.icon_skype,false));
-        opts.add(new OptionComponent("Grabación",R.drawable.icon_mic,false));
+        opts.add(new OptionComponent("Skype",R.drawable.icon_skype,skype_enabled));
+        opts.add(new OptionComponent("Grabación",R.drawable.icon_mic,mic_enabled));
 
         ListView options = new ListView(getActivity());
         OptionArrayAdapter adapter = new OptionArrayAdapter(getActivity(),opts);
@@ -64,22 +70,18 @@ public class MonitorUserActivity extends Fragment {
         ll.addView(options);
 
         List<OptionInfoComponent> recordingOptsInfo = new ArrayList<OptionInfoComponent>();
-        recordingOptsInfo.add(new OptionInfoComponent("Días de la semana","Lu,Ma,Ju",R.id.days_week));
-        recordingOptsInfo.add(new OptionInfoComponent("Hora inicio","09:30",R.id.init_hour));
-        recordingOptsInfo.add(new OptionInfoComponent("Hora fin","22:00",R.id.end_hour));
-        recordingOptsInfo.add(new OptionInfoComponent("Frecuencia","15 min",R.id.freq));
+        recordingOptsInfo.add(new OptionInfoComponent("Días de la semana",getDaysOfWeek(),R.id.days_week,mic_enabled));
+        recordingOptsInfo.add(new OptionInfoComponent("Hora inicio","09:30",R.id.init_hour,mic_enabled));
+        recordingOptsInfo.add(new OptionInfoComponent("Hora fin","22:00",R.id.end_hour,mic_enabled));
 
         ListView recordingOpts = new ListView(getActivity());
         OptionInfoArrayAdapter adapter2 = new OptionInfoArrayAdapter(getActivity(),recordingOptsInfo);
         recordingOpts.setAdapter(adapter2);
-
+        recordingOpts.setEnabled(mic_enabled);
+        recordingOpts.setId(R.id.list_mic);
         recordingOpts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                EmoStatus app;
-                app = (EmoStatus)getActivity().getApplicationContext();
-                Intent option;
-
                 switch (view.getId()){
                     case R.id.days_week:
                         showDaysDialog();
@@ -90,7 +92,6 @@ public class MonitorUserActivity extends Fragment {
                     case R.id.end_hour:
                         showTimePickerDialog(R.id.end_hour);
                         break;
-                    case R.id.freq:break;
                     default: break;
                 }
             }
@@ -139,17 +140,14 @@ public class MonitorUserActivity extends Fragment {
         });
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Listo", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                updateDaysInView();
+                updateDaysInView(true);
             }
         });
-        updateDaysInView();
+        updateDaysInView(false);
         alertDialog.show();
-
     }
 
-    private void updateDaysInView(){
-        View view = getActivity().findViewById(R.id.days_week);
-        TextView info = (TextView)view.findViewById(R.id.info);
+    private String getDaysOfWeek(){
         String infoT = "";
 
         if(days_marked[0])
@@ -185,7 +183,27 @@ public class MonitorUserActivity extends Fragment {
             else
                 infoT = infoT + ",Do";
 
-        info.setText(infoT);
+        if(infoT.equals(""))
+            return "Ninguno";
+        else if(infoT.equals("Lu,Ma,Mi,Ju,Vi,Sa,Do"))
+            return "Todos";
+        else
+            return infoT;
+
+    }
+
+    private void updateDaysInView(boolean check){
+        View view = getActivity().findViewById(R.id.days_week);
+        TextView info = (TextView)view.findViewById(R.id.info);
+        String infoT = getDaysOfWeek();
+        if(check)
+            if(infoT.equals("Ninguno"))
+                Toast.makeText(getActivity(), "Ningún día seleccionado, los cambios no se guardaron",
+                        Toast.LENGTH_LONG).show();
+            else
+                info.setText(infoT);
+        else
+            info.setText(infoT);
     }
 
     private void setDaysViewListeners(View view) {

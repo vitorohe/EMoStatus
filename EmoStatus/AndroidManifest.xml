@@ -10,14 +10,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/emostatus"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name="persistance.EmoStatus">
         <activity
             android:name="com.thesis.emostatus.MainActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name">
+            android:label="@string/app_name">gi
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +27,15 @@
         <activity
             android:name="com.thesis.emostatus.UserListActivity"
             android:label="@string/title_activity_user_list"
+            android:icon="@drawable/icon_user"
             android:parentActivityName="android.app.ListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.ListActivity" />
         </activity>
         <activity
-            android:name="com.thesis.emostatus.UserOptionsActivity">
+            android:name="com.thesis.emostatus.UserOptionsActivity"
+            android:icon="@drawable/icon_user">
 
         </activity>
     </application>

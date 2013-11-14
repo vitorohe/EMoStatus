@@ -5,20 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.List;
 
-import persistance.OptionInfoComponent;
+import persistance.InfoComponent;
 
 
-public class OptionInfoArrayAdapter extends ArrayAdapter<OptionInfoComponent> {
+public class InfoArrayAdapter extends ArrayAdapter<InfoComponent> {
 	private final Context context;
-	private final List<OptionInfoComponent> values;
+	private final List<InfoComponent> values;
 
-	public OptionInfoArrayAdapter(Context context, List<OptionInfoComponent> values) {
+	public InfoArrayAdapter(Context context, List<InfoComponent> values) {
 		super(context, R.layout.two_line_component_list, values);
 		this.context = context;
 		this.values = values;
@@ -27,15 +25,11 @@ public class OptionInfoArrayAdapter extends ArrayAdapter<OptionInfoComponent> {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View option = inflater.inflate(R.layout.text_info, parent, false);
+		View option = inflater.inflate(R.layout.info, parent, false);
 		TextView title = (TextView) option.findViewById(R.id.title);
-		TextView info = (TextView) option.findViewById(R.id.info);
         title.setEnabled(values.get(position).isEnabled());
         title.setText(values.get(position).getTitle());
-        info.setText(values.get(position).getInfo());
-        info.setEnabled(values.get(position).isEnabled());
         option.setId(values.get(position).getId());
-        option.setEnabled(values.get(position).isEnabled());
 		return option;
 	}
 

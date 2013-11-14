@@ -3,5 +3,9 @@
     <item type="id" name="days_week" />
     <item type="id" name="init_hour" />
     <item type="id" name="end_hour" />
-    <item type="id" name="freq" />
+    <item type="id" name="alert_sms" />
+    <item type="id" name="alert_email"/>
+    <item type="id" name="list_alert_email"/>
+    <item type="id" name="list_alert_sms"/>
+    <item type="id" name="list_mic"/>
 </resources>

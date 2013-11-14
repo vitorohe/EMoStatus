@@ -3,19 +3,17 @@ package persistance;
 /**
  * Created by vito on 09-11-13.
  */
-public class OptionInfoComponent {
+public class InfoComponent {
     private String title;
-    private String info;
     private int id;
     private boolean enabled;
 
-    public OptionInfoComponent(){
+    public InfoComponent(){
 
     }
 
-    public OptionInfoComponent(String title, String info, int id, boolean enabled){
+    public InfoComponent(String title, int id, boolean enabled){
         setTitle(title);
-        setInfo(info);
         setId(id);
         setEnabled(enabled);
     }
@@ -26,14 +24,6 @@ public class OptionInfoComponent {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info= info;
     }
 
     public int getId() {

@@ -1,9 +1,12 @@
 package com.thesis.emostatus;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentActivity;
+import android.view.MenuItem;
+
 import persistance.EmoStatus;
 
 public class UserOptionsActivity extends FragmentActivity {
@@ -27,5 +30,14 @@ public class UserOptionsActivity extends FragmentActivity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(user);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem)
+    {
+        startActivity(new Intent(this,UserListActivity.class));
+        return true;
     }
 }

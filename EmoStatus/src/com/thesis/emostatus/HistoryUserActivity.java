@@ -1,5 +1,7 @@
 package com.thesis.emostatus;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
@@ -52,7 +55,43 @@ public class HistoryUserActivity extends Fragment {
             day.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                     90*hist.getHistory().size(),1f*hist.getHistory().size()));
             day_date.setVerticalScrollBarEnabled(false);
+
+            day.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    showDialogInfo(view);
+                }
+            });
+
             ll.addView(day);
         }
+    }
+
+    private void showDialogInfo(View view) {
+        TextView title = (TextView)view.findViewById(R.id.title);
+        String mood = title.getText().toString();
+        if(mood.indexOf("Triste") != -1){
+            int init = mood.indexOf("(");
+            String percentage = mood.substring(init+1,mood.length()-1);
+            showInfoDialog(mood,"El sistema detectó que la persona está triste, con un "
+                    + percentage + " de exactitud.");
+        }
+        else {
+            showInfoDialog(mood,"El sistema detectó que la persona se encuentra en estado "+
+                    "normal o neutral.");
+        }
+
+    }
+
+    public void showInfoDialog(String title, String message){
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
     }
 }
