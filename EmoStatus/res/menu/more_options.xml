@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:icon="@drawable/icon_calendar"
+        android:orderInCategory="100"
+        android:showAsAction="ifRoom"
+        android:id="@+id/calendar"/>
+
+    <item
+        android:id="@+id/overflow"
+        android:icon="@drawable/ic_action_overflow"
+        android:showAsAction="always"
+        android:orderInCategory="200"
+        android:title="Hola">
+        <menu>
+            <item
+                android:id="@+id/help"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:icon="@drawable/icon_help"
+                android:title="Ayuda"/>
+
+            <item
+                android:id="@+id/logout"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:icon="@drawable/icon_logout"
+                android:title="Cerrar Sesión"/>
+
+            <item
+                android:id="@+id/exit"
+                android:orderInCategory="100"
+                android:showAsAction="never"
+                android:title="Salir"/>
+        </menu>
+    </item>
+</menu>

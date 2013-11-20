@@ -1,17 +1,25 @@
 package com.thesis.emostatus;
 
 import android.app.ActionBar;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TabHost;
 
 import persistance.EmoStatus;
 
 public class UserOptionsActivity extends FragmentActivity {
     private FragmentTabHost mTabHost;
     private String user;
+    protected Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +33,19 @@ public class UserOptionsActivity extends FragmentActivity {
         mTabHost.addTab(mTabHost.newTabSpec("monitoring").setIndicator("Monitoreo"),MonitorUserActivity.class,savedInstanceState);
         mTabHost.addTab(mTabHost.newTabSpec("alerts").setIndicator("Alertas"),AlertsUserActivity.class,savedInstanceState);
 
+        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                Log.i("tab",s);
+                if(s.equals("history")){
+                    menu.findItem(R.id.calendar).setVisible(true);
+                }
+                else{
+                    menu.findItem(R.id.calendar).setVisible(false);
+                }
+            }
+        });
+
         EmoStatus app = (EmoStatus)getApplicationContext();
         user = app.getActualUserMonitorized();
 
@@ -35,9 +56,31 @@ public class UserOptionsActivity extends FragmentActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.more_options, menu);
+        this.menu = menu;
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem menuItem)
     {
-        startActivity(new Intent(this,UserListActivity.class));
-        return true;
+        switch (menuItem.getItemId()){
+            case android.R.id.home:
+                startActivity(new Intent(this,UserListActivity.class));
+                break;
+            case R.id.help:
+                break;
+            case R.id.logout:
+                break;
+            case R.id.exit:
+                break;
+            case R.id.calendar:
+                //mTabHost.getCurrentTabView()
+                ((HistoryUserActivity)getSupportFragmentManager().findFragmentByTag("history")).showDatePickerDialog();
+                break;
+        }
+        return super.onOptionsItemSelected(menuItem);
     }
 }

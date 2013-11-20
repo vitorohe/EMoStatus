@@ -3,12 +3,9 @@ package com.thesis.emostatus;
 import android.app.AlertDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,9 +21,9 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TooManyListenersException;
-import java.util.zip.CheckedInputStream;
 
+import adapters.OptionArrayAdapter;
+import adapters.OptionInfoArrayAdapter;
 import persistance.EmoStatus;
 import persistance.OptionComponent;
 import persistance.OptionInfoComponent;
@@ -34,12 +31,14 @@ import persistance.OptionInfoComponent;
 public class MonitorUserActivity extends Fragment {
 
     private boolean[] days_marked;
+    private boolean[] days_markedA;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         days_marked = new boolean[7];
+        days_markedA = new boolean[7];
 
         ScrollView sv = new ScrollView(getActivity());
         //sv.setFillViewport(true);
@@ -195,13 +194,18 @@ public class MonitorUserActivity extends Fragment {
     private void updateDaysInView(boolean check){
         View view = getActivity().findViewById(R.id.days_week);
         TextView info = (TextView)view.findViewById(R.id.info);
-        String infoT = getDaysOfWeek();
+
         if(check)
+            days_marked = days_markedA;
+
+        String infoT = getDaysOfWeek();
+        if(check){
             if(infoT.equals("Ninguno"))
                 Toast.makeText(getActivity(), "Ningún día seleccionado, los cambios no se guardaron",
                         Toast.LENGTH_LONG).show();
             else
                 info.setText(infoT);
+        }
         else
             info.setText(infoT);
     }
@@ -214,9 +218,9 @@ public class MonitorUserActivity extends Fragment {
         lu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[0] = true;
+                    days_markedA[0] = true;
                 } else {
-                    days_marked[0] = false;
+                    days_markedA[0] = false;
                 }
             }
         });
@@ -226,9 +230,9 @@ public class MonitorUserActivity extends Fragment {
         ma.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[1] = true;
+                    days_markedA[1] = true;
                 } else {
-                    days_marked[1] = false;
+                    days_markedA[1] = false;
                 }
             }
         });
@@ -239,9 +243,9 @@ public class MonitorUserActivity extends Fragment {
         mi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[2] = true;
+                    days_markedA[2] = true;
                 } else {
-                    days_marked[2] = false;
+                    days_markedA[2] = false;
                 }
             }
         });
@@ -252,9 +256,9 @@ public class MonitorUserActivity extends Fragment {
         ju.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[3] = true;
+                    days_markedA[3] = true;
                 } else {
-                    days_marked[3] = false;
+                    days_markedA[3] = false;
                 }
             }
         });
@@ -265,9 +269,9 @@ public class MonitorUserActivity extends Fragment {
         vi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[4] = true;
+                    days_markedA[4] = true;
                 } else {
-                    days_marked[4] = false;
+                    days_markedA[4] = false;
                 }
             }
         });
@@ -278,9 +282,9 @@ public class MonitorUserActivity extends Fragment {
         sa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[5] = true;
+                    days_markedA[5] = true;
                 } else {
-                    days_marked[5] = false;
+                    days_markedA[5] = false;
                 }
             }
         });
@@ -291,9 +295,9 @@ public class MonitorUserActivity extends Fragment {
         dom.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    days_marked[6] = true;
+                    days_markedA[6] = true;
                 } else {
-                    days_marked[6] = false;
+                    days_markedA[6] = false;
                 }
             }
         });
@@ -303,10 +307,11 @@ public class MonitorUserActivity extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
                 for(int i = 0; i < 7; i++){
-                    days_marked[i] = checked;
+                    days_markedA[i] = checked;
                     days.get(i).setChecked(checked);
                 }
             }
         });
     }
+
 }

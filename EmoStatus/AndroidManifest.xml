@@ -17,7 +17,7 @@
         <activity
             android:name="com.thesis.emostatus.MainActivity"
             android:screenOrientation="portrait"
-            android:label="@string/app_name">gi
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +35,8 @@
         </activity>
         <activity
             android:name="com.thesis.emostatus.UserOptionsActivity"
-            android:icon="@drawable/icon_user">
+            android:icon="@drawable/icon_user"
+            android:parentActivityName="com.thesis.emostatus.UserListActivity">
 
         </activity>
     </application>

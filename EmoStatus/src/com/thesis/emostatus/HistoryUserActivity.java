@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import adapters.ThreeCompArrayAdapter;
 import persistance.EmoStatus;
 import persistance.HistoryDay;
 
@@ -30,9 +33,10 @@ public class HistoryUserActivity extends Fragment {
         ScrollView sv = new ScrollView(getActivity());
         LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
-        ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-        sv.addView(ll);
+        ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
         addDaysToListLayout(ll);
+        sv.addView(ll);
         return sv;
     }
 
@@ -93,5 +97,21 @@ public class HistoryUserActivity extends Fragment {
             }
         });
         alertDialog.show();
+    }
+
+    public void showDatePickerDialog(){
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.calendar:
+                Log.i("calendar","calendar");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

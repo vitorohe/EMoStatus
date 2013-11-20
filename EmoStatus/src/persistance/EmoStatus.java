@@ -16,6 +16,7 @@ public class EmoStatus extends Application{
     private Context bsc;
     private int actualUserMonitorized;
     private List<ThreeDataComponent> usersMonitorized;
+    private boolean tutorialEnabled = true;
 
     public EmoStatus(){
         super();
@@ -162,5 +163,13 @@ public class EmoStatus extends Application{
             return "Sábado";
 
         return "None";
+    }
+
+    public boolean isTutorialEnabled() {
+        return tutorialEnabled;
+    }
+
+    public void setTutorialEnabled(boolean tutorialEnabled) {
+        this.tutorialEnabled = tutorialEnabled;
     }
 }

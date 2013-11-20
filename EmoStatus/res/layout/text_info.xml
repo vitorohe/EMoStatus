@@ -11,7 +11,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Title"
         android:id="@+id/title"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"/>

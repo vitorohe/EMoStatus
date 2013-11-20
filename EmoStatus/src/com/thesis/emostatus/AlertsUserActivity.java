@@ -2,8 +2,6 @@ package com.thesis.emostatus;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,17 +13,17 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import adapters.InfoArrayAdapter;
+import adapters.OptionArrayAdapter;
 import persistance.EmoStatus;
 import persistance.InfoComponent;
 import persistance.OptionComponent;
-import persistance.OptionInfoComponent;
 
 public class AlertsUserActivity extends Fragment {
         LayoutInflater inflaterA;
