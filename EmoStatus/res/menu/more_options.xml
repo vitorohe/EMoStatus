@@ -17,6 +17,12 @@
                 android:id="@+id/help"
                 android:orderInCategory="100"
                 android:showAsAction="never"
+                android:icon="@drawable/icon_tutorial"
+                android:title="Información"/>
+            <item
+                android:id="@+id/help"
+                android:orderInCategory="100"
+                android:showAsAction="never"
                 android:icon="@drawable/icon_help"
                 android:title="Ayuda"/>
 

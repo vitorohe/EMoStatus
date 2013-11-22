@@ -2,10 +2,8 @@ package com.thesis.emostatus;
 
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +17,7 @@ import persistance.EmoStatus;
 public class UserListActivity extends ListActivity {
 
     private Menu menu;
+    private AlertDialog alertDialog;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,30 +25,7 @@ public class UserListActivity extends ListActivity {
         EmoStatus app = (EmoStatus)getApplicationContext();
         ThreeCompArrayAdapter adapter = new ThreeCompArrayAdapter(this,app.getUsersMonitorized());
         setListAdapter(adapter);
-
-        if(app.isTutorialEnabled()){
-            app.setTutorialEnabled(false);
-            showTutorial();
-        }
 	}
-
-    private void showTutorial() {
-
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        View view = getLayoutInflater().inflate(R.layout.tutorial,alertDialog.getListView());
-        alertDialog.setTitle("Tutorial EmoStatus");
-        alertDialog.setView(view);
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Saltar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Continuar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        alertDialog.show();
-    }
 
     @Override public boolean onKeyDown(int keycode, KeyEvent e) {
         switch(keycode) {
