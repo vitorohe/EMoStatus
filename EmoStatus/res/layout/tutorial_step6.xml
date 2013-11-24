@@ -7,12 +7,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Si deseas más información, tienes alguna duda, o quieres volver a ver este tutorial, puedes hacerlo pinchando en el menú superior derecho"
+        android:text="@string/tuto6_text1"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="51dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:textAlignment="center" />
 
     <ImageView
@@ -21,6 +21,8 @@
         android:src="@drawable/screen_menu_more"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:id="@+id/scree_menu"
         android:layout_below="@+id/textView"/>
 

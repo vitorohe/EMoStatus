@@ -7,12 +7,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Además, puedes configurar la forma en que se monitorea, la que puede ser a través de Skype"
+        android:text="@string/tuto4_text1"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="51dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:textAlignment="center" />
 
     <ImageView
@@ -21,6 +21,8 @@
         android:src="@drawable/screen_monitor_skype"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:id="@+id/scree_skype"
         android:layout_below="@+id/textView"/>
 
@@ -28,10 +30,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="o por Grabación(microfóno)"
+        android:text="@string/tuto4_text2"
         android:id="@+id/textView2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
         android:layout_below="@+id/scree_skype"/>
@@ -42,5 +44,7 @@
         android:src="@drawable/screen_monitor_record"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@+id/textView2"/>
 </RelativeLayout>

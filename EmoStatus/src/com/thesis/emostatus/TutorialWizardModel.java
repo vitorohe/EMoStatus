@@ -28,11 +28,11 @@ public class TutorialWizardModel extends AbstractWizardModel {
     @Override
     protected PageList onNewRootPageList() {
         return new PageList(
-            new SingleViewPage(this, "Bienvenido"),
-            new SingleViewPage(this, "Lista de usuarios"),
-            new SingleViewPage(this, "Historial"),
-            new SingleViewPage(this, "Monitoreo"),
-            new SingleViewPage(this, "Alertas")
+            new SingleViewPage(this, "Bienvenido",R.layout.tutorial_step1),
+            new SingleViewPage(this, "Lista de usuarios",R.layout.tutorial_step2),
+            new SingleViewPage(this, "Historial",R.layout.tutorial_step3),
+            new SingleViewPage(this, "Monitoreo",R.layout.tutorial_step4),
+            new SingleViewPage(this, "Alertas",R.layout.tutorial_step5)
         );
     }
 }

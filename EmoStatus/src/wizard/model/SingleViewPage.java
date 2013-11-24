@@ -26,8 +26,8 @@ import wizard.ui.SingleChoiceFragment;
  */
 public class SingleViewPage extends Page {
 
-    public SingleViewPage(ModelCallbacks callbacks, String title) {
-        super(callbacks, title);
+    public SingleViewPage(ModelCallbacks callbacks, String title, int tuto_layout) {
+        super(callbacks, title, tuto_layout);
     }
 
     @Override

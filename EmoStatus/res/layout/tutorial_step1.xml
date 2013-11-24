@@ -7,25 +7,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Este es un pequeño tutorial para conocer mejor para qué sirve y cómo usar esta aplicación."
+        android:text="@string/tuto1_text1"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:textAlignment="center" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No volver a mostrar la próxima vez que inicie la aplicación."
+        android:text="@string/tuto1_checkbox"
         android:id="@+id/checkBox"
         android:checked="false"
         android:layout_marginTop="34dp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp" />
 
 </RelativeLayout>

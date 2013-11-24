@@ -25,21 +25,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 
 import com.thesis.emostatus.R;
 
-import java.util.List;
-
 import wizard.model.Page;
-import wizard.model.SingleViewPage;
 
 public class SingleChoiceFragment extends Fragment {
     private static final String ARG_KEY = "key";
 
     private PageFragmentCallbacks mCallbacks;
-    private List<String> mChoices;
     private String mKey;
     private Page mPage;
 
@@ -63,17 +61,22 @@ public class SingleChoiceFragment extends Fragment {
         mKey = args.getString(ARG_KEY);
         mPage = mCallbacks.onGetPage(mKey);
 
-        SingleViewPage fixedChoicePage = (SingleViewPage) mPage;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
+        ScrollView sv = new ScrollView(getActivity());
         View rootView = inflater.inflate(R.layout.fragment_page, container, false);
         ((TextView) rootView.findViewById(android.R.id.title)).setText(mPage.getTitle());
 
+        View tuto = inflater.inflate(mPage.getTutoLayout(), container, false);
 
-        return rootView;
+        ((LinearLayout)rootView).addView(tuto);
+
+        sv.addView(rootView);
+        return sv;
     }
 
     @Override

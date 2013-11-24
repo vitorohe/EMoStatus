@@ -22,6 +22,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.thesis.emostatus.R;
@@ -47,12 +49,19 @@ public class ReviewFragment extends Fragment implements ModelCallbacks {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
+        ScrollView sv = new ScrollView(getActivity());
         View rootView = inflater.inflate(R.layout.fragment_page, container, false);
 
         TextView titleView = (TextView) rootView.findViewById(android.R.id.title);
         titleView.setText(R.string.review);
         titleView.setTextColor(getResources().getColor(R.color.review_green));
-        return rootView;
+
+        View tuto = inflater.inflate(R.layout.tutorial_step6,container,false);
+
+        ((LinearLayout)rootView).addView(tuto);
+        sv.addView(rootView);
+        return sv;
     }
 
     @Override

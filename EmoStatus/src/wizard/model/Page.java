@@ -38,10 +38,12 @@ public abstract class Page implements PageTreeNode {
     protected Bundle mData = new Bundle();
     protected String mTitle;
     protected String mParentKey;
+    private int tutoLayout;
 
-    protected Page(ModelCallbacks callbacks, String title) {
+    protected Page(ModelCallbacks callbacks, String title, int tutoLayout) {
         mCallbacks = callbacks;
         mTitle = title;
+        this.tutoLayout = tutoLayout;
     }
 
     public Bundle getData() {
@@ -72,4 +74,7 @@ public abstract class Page implements PageTreeNode {
         return (mParentKey != null) ? mParentKey + ":" + mTitle : mTitle;
     }
 
+    public int getTutoLayout() {
+        return tutoLayout;
+    }
 }

@@ -26,7 +26,8 @@
         </activity>
         <activity
             android:name="com.thesis.emostatus.TutorialActivity"
-            android:icon="@drawable/icon_tutorial">
+            android:icon="@drawable/icon_tutorial"
+            android:label="@string/tuto_name">
 
         </activity>
         <activity
