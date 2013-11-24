@@ -8,6 +8,12 @@
     <string name="title_activity_user">UserActivity</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section3">Section 3</string>        
+
+	<string name="skip">Saltar</string>
+    <string name="next">Siguiente</string>
+    <string name="prev">Anterior</string>
+    <string name="finish">Finalizar</string>
+    <string name="review">Más información</string>
 
 </resources>

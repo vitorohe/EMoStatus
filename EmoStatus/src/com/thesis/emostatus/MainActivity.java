@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
             getDataFromAccount();
 
-            Intent login = new Intent(this,UserListActivity.class);
+            Intent login = new Intent(this,TutorialActivity.class);
             this.startActivity(login);
             finish();
         }

@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.thesis.emostatus.TutorialActivity"
+            android:icon="@drawable/icon_tutorial">
+
+        </activity>
+        <activity
             android:name="com.thesis.emostatus.UserListActivity"
             android:label="@string/title_activity_user_list"
             android:icon="@drawable/icon_user"
