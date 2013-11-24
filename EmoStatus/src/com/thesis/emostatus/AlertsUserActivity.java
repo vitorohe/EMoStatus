@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import adapters.InfoArrayAdapter;
 import adapters.OptionArrayAdapter;
@@ -26,10 +28,20 @@ import persistance.InfoComponent;
 import persistance.OptionComponent;
 
 public class AlertsUserActivity extends Fragment {
-        LayoutInflater inflaterA;
+    private LayoutInflater inflaterA;
+
+    private Pattern pattern;
+    private Matcher matcher;
+
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final String PHONE_PATTERN = "^[0-9]{8}$";
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         inflaterA = inflater;
         ScrollView sv = new ScrollView(getActivity());
         sv.setFillViewport(true);
@@ -110,7 +122,7 @@ public class AlertsUserActivity extends Fragment {
         ll.addView(options3);
     }
 
-    private void showDialog(String opt, final View view) {
+    private void showDialog(final String opt, final View view) {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         if(opt.equals("SMS"))
             alertDialog.setTitle("Número de teléfono");
@@ -131,8 +143,22 @@ public class AlertsUserActivity extends Fragment {
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Listo", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 TextView title = (TextView)view.findViewById(R.id.title);
-                if(texfield.getText().length() != 0)
-                    title.setText(texfield.getText());
+                if(texfield.getText().length() != 0){
+                    if(opt.equals("SMS")){
+                        if(!validate(texfield.getText().toString(),PHONE_PATTERN))
+                            Toast.makeText(getActivity(), "El número telefónico debe constar de 8 números",
+                                    Toast.LENGTH_LONG).show();
+                        else
+                            title.setText(texfield.getText());
+                    }
+                    else{
+                        if(!validate(texfield.getText().toString(),EMAIL_PATTERN))
+                            Toast.makeText(getActivity(), "El formato de correo electrónico es incorrecto",
+                                    Toast.LENGTH_LONG).show();
+                        else
+                            title.setText(texfield.getText());
+                    }
+                }
                 else{
                     Toast.makeText(getActivity(), "Campo vacío, los cambios no se guardaron",
                             Toast.LENGTH_LONG).show();
@@ -140,6 +166,20 @@ public class AlertsUserActivity extends Fragment {
             }
         });
         alertDialog.show();
+
+    }
+
+    /**
+     * Validate hex with regular expression
+     *
+     * @param hex
+     *            hex for validation
+     * @return true valid hex, false invalid hex
+     */
+    public boolean validate(final String hex, String field_pattern) {
+        pattern = Pattern.compile(field_pattern);
+        matcher = pattern.matcher(hex);
+        return matcher.matches();
 
     }
 }

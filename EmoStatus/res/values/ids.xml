@@ -8,4 +8,6 @@
     <item type="id" name="list_alert_email"/>
     <item type="id" name="list_alert_sms"/>
     <item type="id" name="list_mic"/>
+    <item name="monthView" type="id"/>
+    <item name="monthViewL" type="id"/>
 </resources>

@@ -23,4 +23,17 @@
     <color name="review_green">#ff669900</color>
 
     <color name="text_light">#66000000</color>
+    <color name="black">#3C3C3C</color>
+    <color name="gray">#ff757575</color>
+    <color name="light_blue">#A4C2DB</color>
+    <color name="light_gray">#e0e0e0</color>
+    <color name="red">#ff0000</color>
+    <color name="semitransparent">#BB000000</color>
+    <color name="divider_gray">#d0d0d0</color>
+    <color name="light_white">#E6ECF3</color>
+    <color name="transparent">#80000000</color>
+    <color name="transparent_white">#80FFFFFF</color>
+    <color name="green">#B0C527</color>
+    <color name="title_background">#3C3C3C</color>
+    <color name="top_bar_title_text">#ffffff</color>
 </resources>

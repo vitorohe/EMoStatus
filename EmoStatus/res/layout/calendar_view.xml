@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:id="@+id/calendarScrollableView"
+        style="?android:attr/buttonBarStyle"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anterior"
+            android:id="@+id/buttonPrevMonth"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="@drawable/selectable_item_background"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posterior"
+            android:id="@+id/buttonNextMonth"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="@drawable/selectable_item_background"
+            />
+    </LinearLayout>
+
+    <View android:id="@+id/divider"
+        android:background="?android:attr/dividerHorizontal"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/calendarScrollableView"/>
+
+
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollViewCalendar"
+            android:paddingBottom="5dp"
+            android:layout_below="@+id/calendarScrollableView"/>
+
+
+</RelativeLayout>
