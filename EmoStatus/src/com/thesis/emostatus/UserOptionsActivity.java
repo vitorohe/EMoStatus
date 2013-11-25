@@ -1,18 +1,19 @@
 package com.thesis.emostatus;
 
 import android.app.ActionBar;
-import android.app.Fragment;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.GestureDetector;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
+
 import android.widget.TabHost;
+
 
 import persistance.EmoStatus;
 
@@ -73,13 +74,23 @@ public class UserOptionsActivity extends FragmentActivity {
             case R.id.help:
                 break;
             case R.id.logout:
+                Intent login = new Intent(this,MainActivity.class);
+                startActivity(login);
+                finish();
                 break;
             case R.id.exit:
+                finish();
                 break;
             case R.id.calendar:
                 ((HistoryUserActivity)getSupportFragmentManager().findFragmentByTag("history")).showDateOptionsDialog();
                 break;
         }
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,UserListActivity.class));
+        super.onBackPressed();
     }
 }

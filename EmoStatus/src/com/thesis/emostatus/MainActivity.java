@@ -2,16 +2,12 @@ package com.thesis.emostatus;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -71,4 +67,9 @@ public class MainActivity extends Activity implements OnClickListener{
         app.setUsersMonitorized(usersList);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

@@ -1,6 +1,5 @@
 package com.thesis.emostatus;
 
-import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import persistance.EmoStatus;
 public class UserListActivity extends ListActivity {
 
     private Menu menu;
-    private AlertDialog alertDialog;
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,19 @@ public class UserListActivity extends ListActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-        return  true;
+        switch (item.getItemId()){
+            case R.id.help:
+                break;
+            case R.id.logout:
+                Intent login = new Intent(this,MainActivity.class);
+                startActivity(login);
+                finish();
+                break;
+            case R.id.exit:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
 	}
 
     @Override
@@ -58,6 +68,7 @@ public class UserListActivity extends ListActivity {
         Intent options;
         options = new Intent(this,UserOptionsActivity.class);
         this.startActivity(options);
+        finish();
 
     }
 
