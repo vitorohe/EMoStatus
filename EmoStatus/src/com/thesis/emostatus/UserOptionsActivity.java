@@ -77,8 +77,7 @@ public class UserOptionsActivity extends FragmentActivity {
             case R.id.exit:
                 break;
             case R.id.calendar:
-                //mTabHost.getCurrentTabView()
-                ((HistoryUserActivity)getSupportFragmentManager().findFragmentByTag("history")).showDatePickerDialog();
+                ((HistoryUserActivity)getSupportFragmentManager().findFragmentByTag("history")).showDateOptionsDialog();
                 break;
         }
         return super.onOptionsItemSelected(menuItem);

@@ -50,6 +50,4 @@
             android:id="@+id/scrollViewCalendar"
             android:paddingBottom="5dp"
             android:layout_below="@+id/calendarScrollableView"/>
-
-
 </RelativeLayout>

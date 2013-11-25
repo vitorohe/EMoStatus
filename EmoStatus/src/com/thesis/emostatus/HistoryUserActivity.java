@@ -13,21 +13,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import adapters.InfoArrayAdapter;
 import adapters.ThreeCompArrayAdapter;
 import calendar.ui.CalendarButton;
 import calendar.util.CalendarUtil;
 import persistance.EmoStatus;
 import persistance.HistoryDay;
+import persistance.InfoComponent;
 
 import static android.widget.LinearLayout.LayoutParams;
 
@@ -38,51 +42,107 @@ public class HistoryUserActivity extends Fragment {
     private int actualMonth;
     private int actualYear;
     private AlertDialog alertDatePickerDialog;
+    private List<HistoryDay> history;
+    private ScrollView sv;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.inflater = inflater;
 
-        ScrollView sv = new ScrollView(getActivity());
+        sv = new ScrollView(getActivity());
+
+        EmoStatus app = (EmoStatus)getActivity().getApplicationContext();
+        history = app.getHistoryActualUserMonitorized();
+
+        addDaysToListLayout();
+        return sv;
+    }
+
+    private void addDaysToListLayout() {
         LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
-        addDaysToListLayout(ll);
+        sv.removeAllViews();
+
+        if(history.size() == 0)
+            noHistoryFound(ll);
+        else
+            for(HistoryDay hist : history){
+                addDay(ll, hist);
+            }
+
+
         sv.addView(ll);
-        return sv;
     }
 
-    private void addDaysToListLayout(LinearLayout ll) {
-        EmoStatus app = (EmoStatus)getActivity().getApplicationContext();
-        List<HistoryDay> history = app.getHistoryActualUserMonitorized();
+    private void addDaysWeekToListLayout() {
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
+        sv.removeAllViews();
+        Calendar today = Calendar.getInstance();
+        int week = today.get(Calendar.WEEK_OF_MONTH);
+        int month = today.get(Calendar.MONTH);
+        int i = 0;
         for(HistoryDay hist : history){
-            TextView day_date = new TextView(getActivity());
-            day_date.setText(hist.getDay_date());
-            day_date.setPadding(15,10,0,10);
-            day_date.setTypeface(null, Typeface.BOLD);
-            day_date.setBackgroundColor(Color.LTGRAY);
-            ll.addView(day_date);
+            Date date = hist.getDate();
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
 
-            ListView day = new ListView(getActivity());
-            day.setHeaderDividersEnabled(true);
-            ThreeCompArrayAdapter adapter = new ThreeCompArrayAdapter(getActivity(),hist.getHistory());
-            day.setAdapter(adapter);
-            day.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-                    90*hist.getHistory().size(),1f*hist.getHistory().size()));
-            day_date.setVerticalScrollBarEnabled(false);
-
-            day.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    showDialogInfo(view);
+            if(cal.get(Calendar.MONTH) == month)
+                if(cal.get(Calendar.WEEK_OF_MONTH) == week){
+                    addDay(ll,hist);
+                    i++;
                 }
-            });
-
-            ll.addView(day);
+                else
+                    break;
+            else
+                break;
         }
+
+        if(i == 0)
+            noHistoryFound(ll);
+
+        sv.addView(ll);
+
+    }
+
+    private void addDay(LinearLayout ll, HistoryDay hist) {
+        TextView day_date = new TextView(getActivity());
+        day_date.setText(hist.getDay_date());
+        day_date.setPadding(15,10,0,10);
+        day_date.setTypeface(null, Typeface.BOLD);
+        day_date.setBackgroundColor(Color.LTGRAY);
+        ll.addView(day_date);
+
+        ListView day = new ListView(getActivity());
+        day.setHeaderDividersEnabled(true);
+        ThreeCompArrayAdapter adapter = new ThreeCompArrayAdapter(getActivity(),hist.getHistory());
+        day.setAdapter(adapter);
+        day.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+                90*hist.getHistory().size(),1f*hist.getHistory().size()));
+        day_date.setVerticalScrollBarEnabled(false);
+
+        day.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                showDialogInfo(view);
+            }
+        });
+
+        ll.addView(day);
+    }
+
+    private void noHistoryFound(LinearLayout ll) {
+        TextView mssg = new TextView(getActivity());
+        mssg.setText("No se encontró historial");
+        mssg.setPadding(15, 10, 0, 10);
+        mssg.setTextColor(Color.GRAY);
+        mssg.setTypeface(null, Typeface.BOLD);
+        ll.addView(mssg);
     }
 
     private void showDialogInfo(View view) {
@@ -106,6 +166,47 @@ public class HistoryUserActivity extends Fragment {
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertDialog.show();
+    }
+
+    public void showDateOptionsDialog(){
+        final AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+        alertDialog.setTitle("Historial");
+        alertDialog.setMessage("Elija cómo ver el historial:");
+        ListView list1 = new ListView(getActivity());
+        list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        addDaysToListLayout();
+                        alertDialog.dismiss();
+                        break;
+                    case 1:
+                        addDaysWeekToListLayout();
+                        alertDialog.dismiss();
+                        break;
+                    case 2:
+                        alertDialog.dismiss();
+                        showDatePickerDialog();
+                        break;
+                }
+            }
+        });
+
+        List<String> val = new ArrayList<String>();
+        val.add("Ver todos");
+        val.add("Ver esta semana");
+        val.add("Ver día en calendario");
+
+        list1.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1, val));
+        list1.setPadding(30,5,30,5);
+        alertDialog.setView(list1);
+        alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
             }
@@ -138,8 +239,9 @@ public class HistoryUserActivity extends Fragment {
         calendarMonthsLayout.addView(getMonthLayout(calendar.get(Calendar.MONTH), calendar.get(Calendar.YEAR)));
 
         rootView.findViewById(R.id.buttonNextMonth).setEnabled(false);
+        LinearLayout symbols = (LinearLayout) inflater.inflate(R.layout.symbols_status_layout, null);
+        calendarMonthsLayout.addView(symbols);
         scrollViewCalendar.addView(calendarMonthsLayout);
-
     }
 
 
@@ -163,15 +265,20 @@ public class HistoryUserActivity extends Fragment {
         while (calendar.getTime().before(calendarEnd.getTime())) {
             CalendarButton calendarButton = new CalendarButton(getActivity(), calendar.get(Calendar.YEAR),
                     calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-            Log.d("Developer","Adding date: "+calendar.getTime());
 
             setClickListener(calendarButton);
             if(CalendarUtil.isDateBeforeToday(calendar) || CalendarUtil.isTodayInCalendar(calendar)){
-                calendarButton.setEnabled(true);
-                if(dateWasSad(calendar.getTime())){
-                    calendarButton.setBackgroundResource(R.drawable.calendar_button_sad);
+                HistoryDay hist = hasHistory(calendar);
+                if(hist != null){
+                    calendarButton.setEnabled(true);
+                    calendarButton.setHist(hist);
+                    if(hist.wasSad())
+                        calendarButton.setBackgroundResource(R.drawable.selectable_item_sad_background);
+                    else
+                        calendarButton.setBackgroundResource(R.drawable.selectable_item_background);
                 }
-                else{
+                else {
+                    calendarButton.setEnabled(false);
                     calendarButton.setBackgroundResource(R.drawable.selectable_item_background);
                 }
             }
@@ -179,6 +286,7 @@ public class HistoryUserActivity extends Fragment {
                 calendarButton.setEnabled(false);
                 calendarButton.setBackgroundResource(R.drawable.selectable_item_background);
             }
+
             weekLayout.addView(calendarButton);
             if(calendar.get(Calendar.DAY_OF_WEEK) == 7){
                 monthDayButtonsContainer.addView(weekLayout);
@@ -199,10 +307,26 @@ public class HistoryUserActivity extends Fragment {
         return monthsLayout;
     }
 
-    private boolean dateWasSad(Date time) {
-        return false;
-    }
+    private HistoryDay hasHistory(Calendar calendar) {
+        Date date;
+        Calendar cal = Calendar.getInstance();
+        for(HistoryDay hist : history){
+            date = hist.getDate();
+            cal.setTime(date);
+            if(cal.get(Calendar.YEAR) == calendar.get(Calendar.YEAR))
+                if(cal.get(Calendar.MONTH) == calendar.get(Calendar.MONTH))
+                    if(cal.get(Calendar.DAY_OF_MONTH) == calendar.get(Calendar.DAY_OF_MONTH))
+                        return  hist;
+                    else if(cal.get(Calendar.MONTH) < calendar.get(Calendar.MONTH))
+                        return null;
+                else if(cal.get(Calendar.MONTH) < calendar.get(Calendar.MONTH))
+                    return null;
 
+            else if(cal.get(Calendar.YEAR) < calendar.get(Calendar.YEAR))
+                    return null;
+        }
+        return null;
+    }
 
     private void setWeekDaysLabels(LinearLayout weekDaysLabelsLayout){
         TextView sunday, monday, tuesday, wednesday, thursday, friday, saturday;
@@ -243,12 +367,15 @@ public class HistoryUserActivity extends Fragment {
                         calendar.add(Calendar.DAY_OF_MONTH, 1);
                         LinearLayout l = (LinearLayout)scrollViewCalendar.findViewById(R.id.monthViewL);
                         l.removeView(l.findViewById(R.id.monthView));
+                        l.removeView(l.findViewById(R.id.symbols_layout));
                         actualMonth = actualMonth - 1;
                         if(actualMonth == -1){
                             actualYear --;
                             actualMonth = 11;
                         }
                         l.addView(getMonthLayout(actualMonth, actualYear));
+                        LinearLayout symbols = (LinearLayout) inflater.inflate(R.layout.symbols_status_layout, null);
+                        l.addView(symbols);
                         if(actualMonth < calendar.get(Calendar.MONTH))
                             rootView.findViewById(R.id.buttonNextMonth).setEnabled(true);
                     }
@@ -262,10 +389,13 @@ public class HistoryUserActivity extends Fragment {
                         Calendar calendar = Calendar.getInstance();
                         LinearLayout l = (LinearLayout)scrollViewCalendar.findViewById(R.id.monthViewL);
                         l.removeView(l.findViewById(R.id.monthView));
+                        l.removeView(l.findViewById(R.id.symbols_layout));
                         actualMonth = (actualMonth + 1) % 12;
                         if(actualMonth == 0)
                             actualYear ++;
                         l.addView(getMonthLayout(actualMonth, actualYear));
+                        LinearLayout symbols = (LinearLayout) inflater.inflate(R.layout.symbols_status_layout, null);
+                        l.addView(symbols);
                         if(actualMonth >= calendar.get(Calendar.MONTH) && actualYear == calendar.get(Calendar.YEAR) )
                             rootView.findViewById(R.id.buttonNextMonth).setEnabled(false);
                     }
@@ -280,11 +410,23 @@ public class HistoryUserActivity extends Fragment {
                         CalendarButton calendarButton = ((CalendarButton) view);
                         calendar.set(calendarButton.getYear(), calendarButton.getMonth(), calendarButton.getDay());
                         alertDatePickerDialog.dismiss();
+                        setDayHist(calendarButton.getHist());
                     }
                 });
                 break;
 
         }
+    }
+
+    private void setDayHist(HistoryDay hist) {
+        LinearLayout ll = new LinearLayout(getActivity());
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+        sv.removeAllViews();
+
+        addDay(ll, hist);
+        sv.addView(ll);
     }
 
 

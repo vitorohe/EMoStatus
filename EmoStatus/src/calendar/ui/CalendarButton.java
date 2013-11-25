@@ -26,6 +26,8 @@ import android.graphics.Typeface;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import persistance.HistoryDay;
+
 /**
  * Calendar Button to holds the dates related data
  * @author Santiago Carrillo
@@ -39,6 +41,7 @@ public class CalendarButton extends Button{
     private final int blackColor = Color.parseColor("#3C3C3C");
     private final int lightGrayColor = Color.parseColor("#d0d0d0");
 
+    private HistoryDay hist;
 
     public CalendarButton(Context context, int year, int month, int day) {
         super(context);
@@ -51,6 +54,7 @@ public class CalendarButton extends Button{
         setTypeface(null, Typeface.BOLD);
         setTextColor(blackColor);
     }
+
 
     public int getDay() {
         return day;
@@ -74,5 +78,13 @@ public class CalendarButton extends Button{
             setTypeface(null, Typeface.NORMAL);
             setTextColor(lightGrayColor);
         }
+    }
+
+    public void setHist(HistoryDay hist) {
+        this.hist = hist;
+    }
+
+    public HistoryDay getHist() {
+        return hist;
     }
 }

@@ -2,8 +2,6 @@ package persistance;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
-
 import com.thesis.emostatus.R;
 
 import java.util.ArrayList;
@@ -62,7 +60,17 @@ public class EmoStatus extends Application{
 
         Calendar c = Calendar.getInstance();
 
-        c.roll(Calendar.DAY_OF_YEAR, -4);
+        h1.setDay_date("Hoy");
+        h1.setDate(c.getTime());
+        h1.setWasSad(true);
+        h1Data.add(new ThreeDataComponent("Triste (90%)","10:00 - Grabación", R.drawable.emo_sad));
+        h1Data.add(new ThreeDataComponent("Triste (75%)","09:30 - Grabación", R.drawable.emo_sad));
+        h1.setHistory(h1Data);
+
+        c.roll(Calendar.DAY_OF_YEAR, -1);
+        Date yesterday = c.getTime();
+
+        c.roll(Calendar.DAY_OF_YEAR, -3);
         Date four_days_ago = c.getTime();
 
         c.roll(Calendar.DAY_OF_YEAR, -3);
@@ -71,12 +79,11 @@ public class EmoStatus extends Application{
         c.roll(Calendar.DAY_OF_YEAR, -7);
         Date two_weeks_ago = c.getTime();
 
-        h1.setDay_date("Hoy");
-        h1Data.add(new ThreeDataComponent("Triste (90%)","10:00 - Grabación", R.drawable.emo_sad));
-        h1Data.add(new ThreeDataComponent("Triste (75%)","09:30 - Grabación", R.drawable.emo_sad));
-        h1.setHistory(h1Data);
+        c.setTime(yesterday);
 
         h2.setDay_date("Ayer");
+        h2.setDate(c.getTime());
+        h2.setWasSad(true);
         h2Data.add(new ThreeDataComponent("Normal", "19:00 - Skype", R.drawable.emo_normal));
         h2Data.add(new ThreeDataComponent("Normal","18:00 - Grabación", R.drawable.emo_normal));
         h2Data.add(new ThreeDataComponent("Triste (82%)","17:15 - Grabación", R.drawable.emo_sad));
@@ -86,6 +93,8 @@ public class EmoStatus extends Application{
 
         h3.setDay_date(getDayWeek(c.get(Calendar.DAY_OF_WEEK)) + " " + c.get(Calendar.DAY_OF_MONTH) + " de "
                 + getMonth(c.get(Calendar.MONTH)));
+        h3.setDate(c.getTime());
+        h3.setWasSad(true);
         h3Data.add(new ThreeDataComponent("Triste (70%)","21:15 - Skype", R.drawable.emo_sad));
         h3Data.add(new ThreeDataComponent("Triste (80%)","21:00 - Skype", R.drawable.emo_sad));
         h3.setHistory(h3Data);
@@ -94,6 +103,8 @@ public class EmoStatus extends Application{
 
         h4.setDay_date(getDayWeek(c.get(Calendar.DAY_OF_WEEK)) + " " + c.get(Calendar.DAY_OF_MONTH) + " de "
                 + getMonth(c.get(Calendar.MONTH)));
+        h4.setDate(c.getTime());
+        h4.setWasSad(true);
         h4Data.add(new ThreeDataComponent("Triste", "19:45 - Grabación", R.drawable.emo_sad));
         h4Data.add(new ThreeDataComponent("Normal","16:30 - Grabación", R.drawable.emo_normal));
         h4Data.add(new ThreeDataComponent("Normal","15:00 - Grabación", R.drawable.emo_normal));
@@ -103,6 +114,8 @@ public class EmoStatus extends Application{
 
         h5.setDay_date(getDayWeek(c.get(Calendar.DAY_OF_WEEK)) + " " + c.get(Calendar.DAY_OF_MONTH) + " de "
                 + getMonth(c.get(Calendar.MONTH)));
+        h5.setDate(c.getTime());
+        h5.setWasSad(true);
         h5Data.add(new ThreeDataComponent("Triste (77%)","10:00 - Grabación", R.drawable.emo_sad));
         h5Data.add(new ThreeDataComponent("Normal","08:45 - Skype", R.drawable.emo_sad));
         h5.setHistory(h5Data);

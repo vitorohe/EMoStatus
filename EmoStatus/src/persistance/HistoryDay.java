@@ -1,11 +1,14 @@
 package persistance;
 
+import java.util.Date;
 import java.util.List;
 
 public class HistoryDay {
 
     private String day_date;
+    private Date date;
     private List<ThreeDataComponent> history;
+    private boolean wasSad;
 
     public HistoryDay(){
 
@@ -27,4 +30,18 @@ public class HistoryDay {
         this.history = history;
     }
 
+    public boolean wasSad(){
+        return wasSad;
+    }
+    public void setWasSad(boolean wasSad){
+        this.wasSad = wasSad;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

@@ -26,5 +26,6 @@
     <string name="tuto5_text2">un correo electrónico</string>
     <string name="tuto5_text3">o una notificación de esta misma aplicación en tu teléfono</string>
     <string name="tuto6_text1">Si deseas más información, tienes alguna duda, o quieres volver a ver este tutorial, puedes hacerlo pinchando en el menú superior derecho</string>
+    <string name="sad_expl">Indica estado triste ese día</string>
 
 </resources>
