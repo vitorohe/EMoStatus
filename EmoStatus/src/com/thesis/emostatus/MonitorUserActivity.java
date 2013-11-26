@@ -54,7 +54,7 @@ public class MonitorUserActivity extends Fragment {
         days_marked[1] = true;
         days_marked[2] = true;
         days_marked[4] = true;
-        boolean skype_enabled = false;
+        boolean skype_enabled = true;
         boolean mic_enabled = false;
 
         List<OptionComponent> opts = new ArrayList<OptionComponent>();

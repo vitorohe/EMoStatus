@@ -14,7 +14,7 @@
         android:title="Hola">
         <menu>
             <item
-                android:id="@+id/help"
+                android:id="@+id/info"
                 android:orderInCategory="100"
                 android:showAsAction="never"
                 android:icon="@drawable/icon_tutorial"

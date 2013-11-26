@@ -45,7 +45,13 @@ public class UserListActivity extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case R.id.info:
+                Intent info = new Intent(this,InformationActivity.class);
+                startActivity(info);
+                break;
             case R.id.help:
+                Intent help = new Intent(this,HelpActivity.class);
+                startActivity(help);
                 break;
             case R.id.logout:
                 Intent login = new Intent(this,MainActivity.class);

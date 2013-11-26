@@ -71,7 +71,13 @@ public class UserOptionsActivity extends FragmentActivity {
             case android.R.id.home:
                 startActivity(new Intent(this,UserListActivity.class));
                 break;
+            case R.id.info:
+                Intent info = new Intent(this,InformationActivity.class);
+                startActivity(info);
+                break;
             case R.id.help:
+                Intent help = new Intent(this,HelpActivity.class);
+                startActivity(help);
                 break;
             case R.id.logout:
                 Intent login = new Intent(this,MainActivity.class);

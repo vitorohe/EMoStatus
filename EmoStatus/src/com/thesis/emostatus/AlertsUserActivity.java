@@ -57,7 +57,7 @@ public class AlertsUserActivity extends Fragment {
         EmoStatus app = (EmoStatus)getActivity().getApplicationContext();
         boolean email_enabled = true;
         boolean phone_enabled = false;
-        boolean emonot_enabled = true;
+        boolean emonot_enabled = false;
         //----- SMS -----
         List<OptionComponent> opts1 = new ArrayList<OptionComponent>();
         opts1.add(new OptionComponent("SMS", R.drawable.icon_sms, phone_enabled));

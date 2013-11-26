@@ -15,17 +15,21 @@
     <string name="prev">Anterior</string>
     <string name="finish">Finalizar</string>
     <string name="review">Más información</string>
-    <string name="tuto_name">Tutorial EmoStatus</string>
-    <string name="tuto1_text1">Este es un pequeño tutorial para conocer mejor para qué sirve y cómo usar esta aplicación.</string>
+    <string name="tuto_name">Guía Rápida EmoStatus</string>
+    <string name="tuto1_text1">Este es una pequeña guía para conocer mejor para qué sirve y cómo usar esta aplicación.</string>
     <string name="tuto1_checkbox">No volver a mostrar la próxima vez que inicie la aplicación.</string>
     <string name="tuto2_text1">Esta aplicación te permite monitorear el estado anímico de uno o más usuarios, el cual se obtiene mediante la grabación de la voz.</string>
-    <string name="tuto3_text1">Puedes revisar el historial de estados de un usuario, viendo la fecha, hora y medio en que se detectó cierto estado.</string>
+    <string name="tuto3_text1">Puedes revisar el historial de estados de un usuario, viendo la fecha, hora y forma de monitoreo(Skype o Grabación) en que se detectó cierto estado.</string>
     <string name="tuto4_text1">Además, puedes configurar la forma en que se monitorea, la que puede ser a través de Skype</string>
     <string name="tuto4_text2">o por Grabación(microfóno)</string>
     <string name="tuto5_text1">En caso de que el sistema detecte un estado vulnerable (tristeza), la aplicación enviará una alerta. Esta alerta puede ser un SMS</string>
     <string name="tuto5_text2">un correo electrónico</string>
-    <string name="tuto5_text3">o una notificación de esta misma aplicación en tu teléfono</string>
+    <string name="tuto5_text3">o una notificación en tu teléfono, generada por esta aplicación</string>
     <string name="tuto6_text1">Si deseas más información, tienes alguna duda, o quieres volver a ver este tutorial, puedes hacerlo pinchando en el menú superior derecho</string>
     <string name="sad_expl">Indica estado triste ese día</string>
+    <string name="title_activity_information">Información</string>
+    <string name="title_activity_alertsInfo">Alertas</string>
+    <string name="title_activity_monitorInfo">Monitoreo</string>
+    <string name="title_activity_help">Ayuda</string>
 
 </resources>

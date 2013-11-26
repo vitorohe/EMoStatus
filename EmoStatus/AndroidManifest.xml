@@ -45,6 +45,26 @@
             android:parentActivityName="com.thesis.emostatus.UserListActivity">
 
         </activity>
+        <activity
+            android:name="com.thesis.emostatus.InformationActivity"
+            android:label="@string/title_activity_information"
+            android:icon="@drawable/icon_tutorial">
+        </activity>
+        <activity
+            android:name=".MonitorInfoActivity"
+            android:label="@string/title_activity_monitorInfo"
+            android:icon="@drawable/icon_tutorial">
+        </activity>
+        <activity
+            android:name=".AlertsInfoActivity"
+            android:label="@string/title_activity_alertsInfo"
+            android:icon="@drawable/icon_tutorial">
+        </activity>
+        <activity
+            android:name=".HelpActivity"
+            android:label="@string/title_activity_help"
+            android:icon="@drawable/icon_help">
+        </activity>
     </application>
 
 </manifest>

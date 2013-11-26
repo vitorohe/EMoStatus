@@ -43,8 +43,8 @@ public class MainActivity extends Activity implements OnClickListener{
         String username = ((EditText) findViewById(R.id.username)).getText().toString();
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-        //if(username.equals("emostatus") && password.equals("emopass")){
-        if(username.equals("") && password.equals("")){
+        if(username.equals("emostatus") && password.equals("emopass")){
+        //if(username.equals("") && password.equals("")){
 
             getDataFromAccount();
 
@@ -62,7 +62,7 @@ public class MainActivity extends Activity implements OnClickListener{
         EmoStatus app = (EmoStatus)getApplicationContext();
         List<ThreeDataComponent> usersList = new ArrayList<ThreeDataComponent>();
         usersList.add(new ThreeDataComponent("Tío Pepe","Triste (90%)",R.drawable.user_tio_pepe));
-        usersList.add(new ThreeDataComponent("Abuela Lorena","Triste (75%)",R.drawable.user_abuela_lorena));
+        usersList.add(new ThreeDataComponent("Abuela Lorena","Triste (70%)",R.drawable.user_abuela_lorena));
         usersList.add(new ThreeDataComponent("Tío Jorge","Normal",R.drawable.user_tio_jorge));
         app.setUsersMonitorized(usersList);
     }

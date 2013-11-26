@@ -54,6 +54,7 @@ public class TutorialActivity extends FragmentActivity implements
 
     private List<Page> mCurrentPageSequence;
     private StepPagerStrip mStepPagerStrip;
+    private boolean back;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,8 @@ public class TutorialActivity extends FragmentActivity implements
         if (savedInstanceState != null) {
             mWizardModel.load(savedInstanceState.getBundle("model"));
         }
+
+        back = getIntent().getBooleanExtra("action_back",false);
 
         mWizardModel.registerListener(this);
 
@@ -123,7 +126,10 @@ public class TutorialActivity extends FragmentActivity implements
         mSkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToUsersList();
+                if(back)
+                    onBackPressed();
+                else
+                    goToUsersList();
             }
         });
 
@@ -282,5 +288,11 @@ public class TutorialActivity extends FragmentActivity implements
         public int getCutOffPage() {
             return mCutOffPage;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(back)
+            super.onBackPressed();
     }
 }
