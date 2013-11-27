@@ -35,7 +35,7 @@ public class MonitorInfoActivity extends ExpandableListActivity {
 
         Map<String, String> curChildMap11 = new HashMap<String, String>();
         children1.add(curChildMap11);
-        curChildMap11.put(IS_EVEN, "EL sistema detectará el estado anímico a partir de las videollamadas que se hagan en el dispositivo del usuario.");
+        curChildMap11.put(IS_EVEN, "El sistema detectará el estado anímico a partir de las videollamadas que se hagan en el dispositivo del usuario.");
         childData.add(children1);
 
         Map<String, String> curGroupMap2 = new HashMap<String, String>();
@@ -50,7 +50,7 @@ public class MonitorInfoActivity extends ExpandableListActivity {
 
         Map<String, String> curChildMap22 = new HashMap<String, String>();
         children2.add(curChildMap22);
-        curChildMap22.put(IS_EVEN, "Las grabaciones se harán con una determinada frecuencia(ej: cada 15 min). Tú solo debese preocuparte de configurar los días, y el horario de grabación.");
+        curChildMap22.put(IS_EVEN, "Las grabaciones se harán con una determinada frecuencia(ej: cada 15 min). Tú solo debes preocuparte de configurar los días, y el horario de grabación.");
 
 
         childData.add(children2);
