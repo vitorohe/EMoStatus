@@ -117,7 +117,7 @@ public class EmoStatus extends Application{
                 + getMonth(c.get(Calendar.MONTH)));
         h4.setDate(c.getTime());
         h4.setWasSad(true);
-        h4Data.add(new ThreeDataComponent("Triste", "19:45 - Grabación", R.drawable.emo_sad));
+        h4Data.add(new ThreeDataComponent("Triste (90%)", "19:45 - Grabación", R.drawable.emo_sad));
         h4Data.add(new ThreeDataComponent("Normal","16:30 - Grabación", R.drawable.emo_normal));
         h4Data.add(new ThreeDataComponent("Normal","15:00 - Grabación", R.drawable.emo_normal));
         h4.setHistory(h4Data);
@@ -204,7 +204,7 @@ public class EmoStatus extends Application{
                 + getMonth(c.get(Calendar.MONTH)));
         h4.setDate(c.getTime());
         h4.setWasSad(true);
-        h4Data.add(new ThreeDataComponent("Triste", "19:45 - Grabación", R.drawable.emo_sad));
+        h4Data.add(new ThreeDataComponent("Triste (85%)", "19:45 - Grabación", R.drawable.emo_sad));
         h4Data.add(new ThreeDataComponent("Normal","16:30 - Grabación", R.drawable.emo_normal));
         h4Data.add(new ThreeDataComponent("Normal","15:00 - Grabación", R.drawable.emo_normal));
         h4.setHistory(h4Data);

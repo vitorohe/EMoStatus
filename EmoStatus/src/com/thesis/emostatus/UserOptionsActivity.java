@@ -85,6 +85,7 @@ public class UserOptionsActivity extends FragmentActivity {
                 finish();
                 break;
             case R.id.exit:
+                android.os.Process.killProcess(android.os.Process.myPid());
                 finish();
                 break;
             case R.id.calendar:

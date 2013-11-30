@@ -12,7 +12,8 @@
         android:showAsAction="always"
         android:orderInCategory="200"
         android:title="Hola">
-        <menu>
+        <menu
+            android:id="@+id/info_submenu">
             <item
                 android:id="@+id/info"
                 android:orderInCategory="100"

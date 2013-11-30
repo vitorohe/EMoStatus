@@ -59,6 +59,7 @@ public class UserListActivity extends ListActivity {
                 finish();
                 break;
             case R.id.exit:
+                android.os.Process.killProcess(android.os.Process.myPid());
                 finish();
                 break;
         }
@@ -75,7 +76,9 @@ public class UserListActivity extends ListActivity {
         options = new Intent(this,UserOptionsActivity.class);
         this.startActivity(options);
         finish();
-
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 }
