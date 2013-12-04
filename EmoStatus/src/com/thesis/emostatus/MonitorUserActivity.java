@@ -54,6 +54,8 @@ public class MonitorUserActivity extends Fragment {
         days_marked[1] = true;
         days_marked[2] = true;
         days_marked[4] = true;
+        for(int i = 0; i < 7; i++)
+            days_markedA[i] = days_marked[i];
         boolean skype_enabled = true;
         boolean mic_enabled = false;
 
@@ -102,7 +104,7 @@ public class MonitorUserActivity extends Fragment {
 
     }
 
-    
+
     private void showTimePickerDialog(final int id) {
         View v = getActivity().findViewById(id);
         final TextView info = (TextView)v.findViewById(R.id.info);
@@ -135,6 +137,8 @@ public class MonitorUserActivity extends Fragment {
         alertDialog.setView(view);
         alertDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancelar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                for(int i = 0; i < 7; i++)
+                    days_markedA[i] = days_marked[i];
             }
         });
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Listo", new DialogInterface.OnClickListener() {
@@ -196,7 +200,8 @@ public class MonitorUserActivity extends Fragment {
         TextView info = (TextView)view.findViewById(R.id.info);
 
         if(check)
-            days_marked = days_markedA;
+            for(int i = 0; i < 7; i++)
+                days_marked[i] = days_markedA[i];
 
         String infoT = getDaysOfWeek();
         if(check){
@@ -313,5 +318,4 @@ public class MonitorUserActivity extends Fragment {
             }
         });
     }
-
 }
