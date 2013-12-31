@@ -43,11 +43,11 @@ fi
 # call create_model script
 # params
 basename_dir=`basename $AUDIO_DIR`
-NAME=$AUDIO_DIR$basename_dir-$conf_name-linear.lsvm
+NAME=$AUDIO_DIR$basename_dir-$conf_name-poly3gc.lsvm
 SVM_FILES_DIR=$AUDIO_DIR
 SVM_TYPE=0 # C-SVC=0, nu-SVC=1, one-class=3  
-SVM_KERNEL=0 # Linear=0, Polynomial=1, RBF=2
-SVM_DEGREE=1
+SVM_KERNEL=1 # Linear=0, Polynomial=1, RBF=2
+SVM_DEGREE=3
 SVM_GAMMA=1
 SVM_C=1
 SVM_PROB=1

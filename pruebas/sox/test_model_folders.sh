@@ -22,7 +22,7 @@ for folder in $folders; do
 		for audio_file in $audio_files; do
 			# ./convert_audio_file.sh $audio_file
 			# ./normalize_audio_file.sh $audio_file
-			./lowpass_audio_file.sh $audio_file
+			# ./lowpass_audio_file.sh $audio_file
 			SMILExtract -C $SMILE_DIR/config/$conf_name.conf -I $audio_file -O $folder/$folder_name-$conf_name.arff
 		done
 

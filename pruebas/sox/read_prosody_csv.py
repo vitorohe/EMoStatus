@@ -142,11 +142,13 @@ def process_csv(csv_filename):
 			try:
 
 				while float(spamreader.next()[3]) < 0.55 :
+				# while float(spamreader.next()[2]) == 0.0 :
 					pass
 
 				init = int(spamreader.line_num) - 1
 
 				while float(spamreader.next()[3]) >= 0.55 :
+				# while float(spamreader.next()[2]) != 0.0 :
 					pass
 
 				end = int(spamreader.line_num) - 2
