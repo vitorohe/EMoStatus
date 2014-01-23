@@ -29,7 +29,7 @@ def get_chunks(cuts,min_pause_to_cut,output_dir,same_output=False):
 	
 		end_pause = cuts[num]['init'] - 1
 		pause = {'init':init_pause, 'end':end_pause, 'duration':end_pause - init_pause + 1}
-		print pause
+		# print pause
 		if pause['duration'] >= min_pause_to_cut:
 			if same_output:
 				end_chunk = cuts[num]['end']
@@ -43,8 +43,8 @@ def get_chunks(cuts,min_pause_to_cut,output_dir,same_output=False):
 			# 	chunks.append(shorter_chunks)
 			# else:
 			# print '\t',chunk
-			if chunk['duration'] >= 50:
-				print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
+			if chunk['duration'] >= min_pause_to_cut:
+				# print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
 				chunks.append(chunk)
 
 			i = 0
@@ -59,8 +59,8 @@ def get_chunks(cuts,min_pause_to_cut,output_dir,same_output=False):
 		end_chunk = pause['end']-1
 		chunk = {'init':init_chunk, 'end':end_chunk, 'duration':end_chunk - init_chunk + 1, 'num_cuts':i, 'cuts':ch_cuts}
 		
-		if chunk['duration'] >= 50:
-			print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
+		if chunk['duration'] >= min_pause_to_cut:
+			# print 'init:',chunk['init'],', end:',chunk['end'],', duration:',chunk['duration'],', num_cuts:',chunk['num_cuts']
 			chunks.append(chunk)
 
 	get_cuts(chunks,audio_filename,output_dir,same_output=same_output)
