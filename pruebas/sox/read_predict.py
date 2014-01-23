@@ -19,7 +19,6 @@ def get_dir_wav_files(predict_path):
 
 def classify_pf_wav_filename(pf_filename):
 
-	rows = []	
 	wav_files = get_dir_wav_files(pf_filename)
 	i = 0
 	
@@ -38,6 +37,28 @@ def classify_pf_wav_filename(pf_filename):
 		for row in data:
 			copy(wav_files[i],predict_dir+'/'+row[0])
 			i = i + 1
+
+def classify_pf_wav_filename_to_db(pf_filename, recording_id, first_classiff=True, second_classif=False):
+	
+	wav_files = get_dir_wav_files(pf_filename)
+	i = 0
+	
+	with open(pf_filename, 'rb') as pffile:
+		data = csv.reader(pffile, delimiter=' ')
+		
+		labels = data.next()
+
+		predict_dir = path.dirname(pf_filename)
+				
+		for row in data:
+			if first_classiff:
+				query_update = "UPDATE chunks SET first_classification_group_id=%s WHERE name LIKE '%%s%' AND recording_id=%s" % (row[0],wav_files[i],recording_id)
+			elif second_classif:
+				query_update = "UPDATE chunks SET second_classification_group_id=%s WHERE name LIKE '%%s%' AND recording_id=%s" % (row[0],wav_files[i],recording_id)				
+			
+			print wav_files[i],query_update
+			i = i + 1
+
 
 def add_pf_wav_filename(pf_filename):
 
@@ -124,6 +145,9 @@ if __name__ == '__main__':
 	_opt("--cn", help="Set correct predict class number")
 	_opt("--pfwav", help="Set predict filename to add wavs filename")
 	_opt("--clpf", help="Set predict filename classify audio files")
+	_opt("--clpfdb", help="Save classification result to db")
+	_opt("--rid", help="Recording id")
+	_opt("--classifn", help="Number of classification")
 
 	_cmd_options, _cmd_args = _cmd_parser.parse_args()
 
@@ -145,3 +169,15 @@ if __name__ == '__main__':
 	elif not opt.clpf is None:
 		pf_filename = opt.clpf
 		classify_pf_wav_filename(pf_filename)
+
+	elif not opt.clpfdb is None:
+		pf_filename = opt.clpfdb
+		if not opt.rid is None and not opt.classifn is None:
+			recording_id = opt.rid
+		else:
+			print "Classification data to db requires recording_id and classification number"
+
+		if opt.classifn == 1:
+			classify_pf_wav_filename_to_db(pf_filename, recording_id):
+		else
+			classify_pf_wav_filename_to_db(pf_filename, recording_id, first_classiff=False, second_classif=True):
