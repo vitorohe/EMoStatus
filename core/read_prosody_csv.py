@@ -203,7 +203,7 @@ if __name__ == '__main__':
     cuts = process_csv(csv_filename)
 
     if opt.ch:
-    	min_pause_to_cut = 60
+    	min_pause_to_cut = 50
     	if opt.sout:
         	get_chunks(cuts,min_pause_to_cut,output_dir,same_output=True)
         else:

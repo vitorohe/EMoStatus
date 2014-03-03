@@ -6,7 +6,7 @@ package persistance;
 public class OptionComponent {
     private String title;
     private int iconId;
-    private Boolean checked;
+    private boolean checked;
 
     public OptionComponent(){
 
@@ -34,7 +34,7 @@ public class OptionComponent {
         this.iconId = iconId;
     }
 
-    public Boolean isChecked() {
+    public boolean isChecked() {
         return checked;
     }
 

@@ -48,7 +48,7 @@ public class UserOptionsActivity extends FragmentActivity {
         });
 
         EmoStatus app = (EmoStatus)getApplicationContext();
-        user = app.getActualUserMonitorized();
+        user = app.getActualUserMonitored();
 
         ActionBar actionBar = getActionBar();
         actionBar.setTitle(user);

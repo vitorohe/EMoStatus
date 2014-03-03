@@ -21,7 +21,7 @@ public class UserListActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         EmoStatus app = (EmoStatus)getApplicationContext();
-        ThreeCompArrayAdapter adapter = new ThreeCompArrayAdapter(this,app.getUsersMonitorized());
+        ThreeCompArrayAdapter adapter = new ThreeCompArrayAdapter(this,app.getUsersMonitored());
         setListAdapter(adapter);
 	}
 
@@ -71,7 +71,7 @@ public class UserListActivity extends ListActivity {
         super.onListItemClick(l, v, position, id);
         EmoStatus app;
         app = (EmoStatus)getApplicationContext();
-        app.setActualUserMonitorized(position);
+        app.setActualUserMonitored(position);
         Intent options;
         options = new Intent(this,UserOptionsActivity.class);
         this.startActivity(options);

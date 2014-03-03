@@ -90,22 +90,20 @@ for file in $chunk_files; do
 		mysql -u $USER -h$HOST $DBNAME -e "INSERT INTO chunks (name,recording_id) VALUES('$file',$ID_AUDIO_FILE)"
 	fi
 	echo "$file in database"
-	SMILExtract -C $SMILE_DIR/config/$conf_name_first_classification.conf -I $file -O $OUTPUT_DIR/$audio_base-f-$conf_name_first_classification.arff
-	SMILExtract -C $SMILE_DIR/config/$conf_name_first_classification.conf -I $file -O $OUTPUT_DIR/$audio_base-s-$conf_name_second_classification.arff
+	SMILExtract -C $SMILE_DIR/config/$conf_name_first_classification.conf -I $file -O $OUTPUT_DIR/$audio_base-1-$conf_name_first_classification.arff
+	SMILExtract -C $SMILE_DIR/config/$conf_name_first_classification.conf -I $file -O $OUTPUT_DIR/$audio_base-2-$conf_name_second_classification.arff
 done
 
-exit 0
-
 # delete string field in arff files
-sed "s/'noname',//g" -i $OUTPUT_DIR/$audio_base-f-$conf_name_first_classification.arff
-sed "s/@attribute name string//g" -i $OUTPUT_DIR/$audio_base-f-$conf_name_first_classification.arff
+sed "s/'noname',//g" -i $OUTPUT_DIR/$audio_base-1-$conf_name_first_classification.arff
+sed "s/@attribute name string//g" -i $OUTPUT_DIR/$audio_base-1-$conf_name_first_classification.arff
 
-sed "s/'noname',//g" -i $OUTPUT_DIR/$audio_base-s-$conf_name_second_classification.arff
-sed "s/@attribute name string//g" -i $OUTPUT_DIR/$audio_base-s-$conf_name_second_classification.arff
+sed "s/'noname',//g" -i $OUTPUT_DIR/$audio_base-2-$conf_name_second_classification.arff
+sed "s/@attribute name string//g" -i $OUTPUT_DIR/$audio_base-2-$conf_name_second_classification.arff
 
 # transform arff to libsvm
-perl $SMILE_DIR/scripts/modeltrain/arffToLsvm.pl $OUTPUT_DIR/$audio_base-f-$conf_name_first_classification.arff
-perl $SMILE_DIR/scripts/modeltrain/arffToLsvm.pl $OUTPUT_DIR/$audio_base-s-$conf_name_second_classification.arff
+perl $SMILE_DIR/scripts/modeltrain/arffToLsvm.pl $OUTPUT_DIR/$audio_base-1-$conf_name_first_classification.arff
+perl $SMILE_DIR/scripts/modeltrain/arffToLsvm.pl $OUTPUT_DIR/$audio_base-2-$conf_name_second_classification.arff
 
 
 model_first_classification="$MODEL_DIR/class-three-groups-emobase2010-linear.lsvm.model"
@@ -118,14 +116,14 @@ model_second_classif_base=`basename $model_second_classification`
 model_second_classif_base=${model_second_classif_base%.*.*}
 
 # For every chunk detect emotion first group filter
-$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-predict -b 1 $OUTPUT_DIR/$audio_base-f-$conf_name_first_classification.lsvm $model_first_classification $OUTPUT_DIR/$audio_base-$model_first_classif_base-predict
+$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-predict -b 1 $OUTPUT_DIR/$audio_base-1-$conf_name_first_classification.lsvm $model_first_classification $OUTPUT_DIR/$audio_base-$model_first_classif_base-predict
 
 # Save classification to db
 echo "Save first classification to db"
 python read_predict.py --clpfdb $OUTPUT_DIR/$audio_base-$model_first_classif_base-predict --rid $ID_AUDIO_FILE --classifn 1
 
 # For every chunk detect emotion second group filter
-$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-predict -b 1 $OUTPUT_DIR/$audio_base-s-$conf_name_second_classification.lsvm $model_second_classification $OUTPUT_DIR/$audio_base-$model_second_classif_base-predict
+$SMILE_DIR/scripts/modeltrain/libsvm-small/svm-predict -b 1 $OUTPUT_DIR/$audio_base-2-$conf_name_second_classification.lsvm $model_second_classification $OUTPUT_DIR/$audio_base-$model_second_classif_base-predict
 
 # Save classification to db
 echo "Save second classification to db"

@@ -12,13 +12,13 @@ import java.util.List;
 
 public class EmoStatus extends Application{
     private Context bsc;
-    private int actualUserMonitorized;
-    private List<ThreeDataComponent> usersMonitorized;
+    private int actualUserMonitored;
+    private List<ThreeDataComponent> usersMonitored;
     private boolean tutorialEnabled = true;
 
     public EmoStatus(){
         super();
-        this.usersMonitorized = new ArrayList<ThreeDataComponent>();
+        this.usersMonitored = new ArrayList<ThreeDataComponent>();
     }
 
     @Override
@@ -27,24 +27,24 @@ public class EmoStatus extends Application{
         bsc = getBaseContext();
     }
 
-    public void setActualUserMonitorized(int actualUserMonitorized) {
-        this.actualUserMonitorized = actualUserMonitorized;
+    public void setActualUserMonitored(int actualUserMonitored) {
+        this.actualUserMonitored = actualUserMonitored;
     }
 
-    public String getActualUserMonitorized() {
-        return this.usersMonitorized.get(this.actualUserMonitorized).getTitle();
+    public String getActualUserMonitored() {
+        return this.usersMonitored.get(this.actualUserMonitored).getTitle();
     }
 
-    public List<ThreeDataComponent> getUsersMonitorized() {
-        return usersMonitorized;
+    public List<ThreeDataComponent> getUsersMonitored() {
+        return usersMonitored;
     }
 
-    public void setUsersMonitorized(List<ThreeDataComponent> usersMonitorized) {
-        this.usersMonitorized = usersMonitorized;
+    public void setUsersMonitored(List<ThreeDataComponent> usersMonitored) {
+        this.usersMonitored = usersMonitored;
     }
 
     public List<HistoryDay> getHistoryActualUserMonitorized() {
-        switch (actualUserMonitorized){
+        switch (actualUserMonitored){
             case 0:
                 return getHistoryUser1();
             case 1:
