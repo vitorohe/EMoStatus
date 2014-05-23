@@ -1,0 +1,21 @@
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in SMILExtract : openSMILE starting!
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in SMILExtract : config file is: /home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile/config/emobase2010.conf
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in cComponentManager : successfully registered 97 component types.
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in configManager : reading config file '/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile/config/emobase2010.conf'
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in configManager : reading config file 'arff_targets.conf'
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in configManager : config file 'arff_targets.conf' not found, trying to open '/home/vito/Descargas/Programas/opensmile-2.0-rc1/opensmile/config/arff_targets.conf'.
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in instance 'res' : adjusting resampleRatio from 1.375000 to 1.375000 to match next integer frame size! (targetFs* = 11000.000000)
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in cComponentManager : successfully finished createInstances
+                                 (31 component instances were finalised, 1 data memories were finalised)
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in cComponentManager : starting single thread processing loop
+[ 18.12.2013 - 01:59:08 ]
+    (MSG) [2] in cComponentManager : Processing finished! System ran for 28 ticks.
